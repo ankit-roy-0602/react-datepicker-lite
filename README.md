@@ -1,4 +1,4 @@
-# 🗓️ React DatePicker Lite
+    # 🗓️ React DatePicker Lite
 
 [![npm version](https://badge.fury.io/js/react-datepicker-lite.svg)](https://badge.fury.io/js/react-datepicker-lite)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
@@ -252,7 +252,6 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ## 📞 Support
 
-- 📧 Email: ankit.roy.0602@gmail.com
 - 🐛 Issues: [GitHub Issues](https://github.com/ankit-roy-0602/react-datepicker-lite/issues)
 - 💬 Discussions: [GitHub Discussions](https://github.com/ankit-roy-0602/react-datepicker-lite/discussions)
 
