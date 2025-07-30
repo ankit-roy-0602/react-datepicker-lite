@@ -2,7 +2,7 @@
   "name": "react-datepicker-lite",
   "version": "0.1.0",
   "description": "A lightweight, accessible, and customizable React date picker component with TypeScript support",
-  "main": "dist/index.js",
+  "main": "dist/index.umd.js",
   "module": "dist/index.esm.js",
   "types": "dist/index.d.ts",
   "files": [
@@ -12,7 +12,7 @@
   ],
   "scripts": {
     "dev": "vite",
-    "build": "vite build && tsc --emitDeclarationOnly",
+    "build": "vite build && tsc --project tsconfig.build.json",
     "build:watch": "vite build --watch",
     "test": "vitest",
     "test:ui": "vitest --ui",
