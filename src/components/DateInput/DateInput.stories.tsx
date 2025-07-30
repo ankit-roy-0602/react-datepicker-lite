@@ -67,6 +67,7 @@ export default meta;
 type Story = StoryObj<typeof meta>;
 
 // Wrapper component for interactive stories
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 const DateInputWrapper = (args: any) => {
   const [value, setValue] = useState<Date | null>(null);
   const [isCalendarOpen, setIsCalendarOpen] = useState(false);
@@ -90,22 +91,24 @@ export const Default: Story = {
   },
 };
 
-export const WithValue: Story = {
-  render: (args) => {
-    const [value, setValue] = useState<Date | null>(new Date());
-    const [isCalendarOpen, setIsCalendarOpen] = useState(false);
+const WithValueWrapper = () => {
+  const [value, setValue] = useState<Date | null>(new Date());
+  const [isCalendarOpen, setIsCalendarOpen] = useState(false);
 
-    return (
-      <DateInput
-        {...args}
-        value={value}
-        onChange={setValue}
-        dateAdapter={nativeDateAdapter}
-        isCalendarOpen={isCalendarOpen}
-        onCalendarToggle={setIsCalendarOpen}
-      />
-    );
-  },
+  return (
+    <DateInput
+      value={value}
+      onChange={setValue}
+      dateAdapter={nativeDateAdapter}
+      isCalendarOpen={isCalendarOpen}
+      onCalendarToggle={setIsCalendarOpen}
+      placeholder='Select a date'
+    />
+  );
+};
+
+export const WithValue: Story = {
+  render: () => <WithValueWrapper />,
   args: {
     placeholder: 'Select a date',
   },
@@ -119,22 +122,25 @@ export const Disabled: Story = {
   },
 };
 
-export const ReadOnly: Story = {
-  render: (args) => {
-    const [value] = useState<Date | null>(new Date());
-    const [isCalendarOpen, setIsCalendarOpen] = useState(false);
+const ReadOnlyWrapper = () => {
+  const [value] = useState<Date | null>(new Date());
+  const [isCalendarOpen, setIsCalendarOpen] = useState(false);
 
-    return (
-      <DateInput
-        {...args}
-        value={value}
-        onChange={() => {}}
-        dateAdapter={nativeDateAdapter}
-        isCalendarOpen={isCalendarOpen}
-        onCalendarToggle={setIsCalendarOpen}
-      />
-    );
-  },
+  return (
+    <DateInput
+      value={value}
+      onChange={() => {}}
+      dateAdapter={nativeDateAdapter}
+      isCalendarOpen={isCalendarOpen}
+      onCalendarToggle={setIsCalendarOpen}
+      placeholder='Select a date'
+      readOnly={true}
+    />
+  );
+};
+
+export const ReadOnly: Story = {
+  render: () => <ReadOnlyWrapper />,
   args: {
     placeholder: 'Select a date',
     readOnly: true,
@@ -149,21 +155,23 @@ export const CustomFormat: Story = {
   },
 };
 
-export const CalendarOpen: Story = {
-  render: (args) => {
-    const [value, setValue] = useState<Date | null>(null);
+const CalendarOpenWrapper = () => {
+  const [value, setValue] = useState<Date | null>(null);
 
-    return (
-      <DateInput
-        {...args}
-        value={value}
-        onChange={setValue}
-        dateAdapter={nativeDateAdapter}
-        isCalendarOpen={true}
-        onCalendarToggle={() => {}}
-      />
-    );
-  },
+  return (
+    <DateInput
+      value={value}
+      onChange={setValue}
+      dateAdapter={nativeDateAdapter}
+      isCalendarOpen={true}
+      onCalendarToggle={() => {}}
+      placeholder='Select a date'
+    />
+  );
+};
+
+export const CalendarOpen: Story = {
+  render: () => <CalendarOpenWrapper />,
   args: {
     placeholder: 'Select a date',
   },

@@ -9,7 +9,8 @@ const meta: Meta<typeof DatePicker> = {
     layout: 'centered',
     docs: {
       description: {
-        component: 'A lightweight, accessible, and customizable React date picker component with TypeScript support.',
+        component:
+          'A lightweight, accessible, and customizable React date picker component with TypeScript support.',
       },
     },
   },
