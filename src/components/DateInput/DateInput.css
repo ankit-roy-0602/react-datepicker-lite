@@ -8,7 +8,9 @@
   width: 100%;
   height: var(--rdl-input-height);
   padding: var(--rdl-input-padding-y) var(--rdl-input-padding-x);
-  padding-right: calc(var(--rdl-input-padding-x) + 2rem); /* Space for toggle button */
+  padding-right: calc(
+    var(--rdl-input-padding-x) + 2rem
+  ); /* Space for toggle button */
   font-family: var(--rdl-font-family);
   font-size: var(--rdl-font-size);
   font-weight: var(--rdl-font-weight);
@@ -138,18 +140,18 @@
 }
 
 /* RTL support */
-[dir="rtl"] .rdl-date-input {
+[dir='rtl'] .rdl-date-input {
   padding-left: calc(var(--rdl-input-padding-x) + 2rem);
   padding-right: var(--rdl-input-padding-x);
 }
 
-[dir="rtl"] .rdl-date-input-toggle {
+[dir='rtl'] .rdl-date-input-toggle {
   right: auto;
   left: var(--rdl-spacing-sm);
 }
 
 @media (max-width: 768px) {
-  [dir="rtl"] .rdl-date-input-toggle {
+  [dir='rtl'] .rdl-date-input-toggle {
     left: 0;
   }
 }

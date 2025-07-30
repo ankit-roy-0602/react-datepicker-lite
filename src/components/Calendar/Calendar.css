@@ -222,7 +222,10 @@
   position: relative;
 }
 
-.rdl-calendar--range-selection .rdl-calendar-day--in-range:not(.rdl-calendar-day--range-start):not(.rdl-calendar-day--range-end)::before {
+.rdl-calendar--range-selection
+  .rdl-calendar-day--in-range:not(.rdl-calendar-day--range-start):not(
+    .rdl-calendar-day--range-end
+  )::before {
   content: '';
   position: absolute;
   top: 0;
@@ -309,18 +312,18 @@
 }
 
 /* RTL support */
-[dir="rtl"] .rdl-calendar-header {
+[dir='rtl'] .rdl-calendar-header {
   direction: rtl;
 }
 
-[dir="rtl"] .rdl-calendar-grid {
+[dir='rtl'] .rdl-calendar-grid {
   direction: rtl;
 }
 
-[dir="rtl"] .rdl-calendar-weekdays {
+[dir='rtl'] .rdl-calendar-weekdays {
   direction: ltr; /* Keep weekdays in correct order */
 }
 
-[dir="rtl"] .rdl-calendar-week {
+[dir='rtl'] .rdl-calendar-week {
   direction: ltr; /* Keep days in correct order */
 }

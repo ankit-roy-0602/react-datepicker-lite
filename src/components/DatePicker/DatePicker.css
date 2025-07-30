@@ -171,12 +171,12 @@
 }
 
 /* RTL support */
-[dir="rtl"] .rdl-date-picker-dropdown {
+[dir='rtl'] .rdl-date-picker-dropdown {
   left: auto;
   right: 0;
 }
 
-[dir="rtl"] .rdl-date-picker--dropdown-right .rdl-date-picker-dropdown {
+[dir='rtl'] .rdl-date-picker--dropdown-right .rdl-date-picker-dropdown {
   left: 0;
   right: auto;
 }
