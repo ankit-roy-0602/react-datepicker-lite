@@ -11,7 +11,7 @@ export default defineConfig({
       open: false,
       gzipSize: true,
       brotliSize: true,
-    }),
+    }) as any, // Type assertion to fix compatibility issue
   ],
   resolve: {
     alias: {
