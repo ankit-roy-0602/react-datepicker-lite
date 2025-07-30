@@ -59,16 +59,19 @@ export const DatePicker: React.FC<DatePickerProps> = ({
     [value, onChange]
   );
 
-  const handleCalendarToggle = useCallback((open: boolean) => {
-    if (disabled || readOnly) return;
-    setIsOpen(open);
-  }, [disabled, readOnly]);
+  const handleCalendarToggle = useCallback(
+    (open: boolean) => {
+      if (disabled || readOnly) return;
+      setIsOpen(open);
+    },
+    [disabled, readOnly]
+  );
 
   const handleDateSelect = useCallback(
     (selectedDate: Date) => {
       handleDateChange(selectedDate);
       setCurrentDate(selectedDate);
-      
+
       if (closeOnSelect) {
         setIsOpen(false);
         inputRef.current?.focus();
@@ -98,6 +101,8 @@ export const DatePicker: React.FC<DatePickerProps> = ({
         document.removeEventListener('mousedown', handleClickOutside);
       };
     }
+
+    return undefined;
   }, [isOpen]);
 
   // Handle keyboard navigation
@@ -172,14 +177,14 @@ export const DatePicker: React.FC<DatePickerProps> = ({
       <DateInput {...dateInputProps} />
 
       {isOpen && (
-        <div className="rdl-date-picker-dropdown">
+        <div className='rdl-date-picker-dropdown'>
           <Calendar {...calendarProps} />
-          
+
           {showToday && (
-            <div className="rdl-date-picker-footer">
+            <div className='rdl-date-picker-footer'>
               <button
-                type="button"
-                className="rdl-date-picker-today-button"
+                type='button'
+                className='rdl-date-picker-today-button'
                 onClick={() => handleDateSelect(dateAdapter.today())}
               >
                 Today

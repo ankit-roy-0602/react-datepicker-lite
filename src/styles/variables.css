@@ -4,40 +4,42 @@
   --rdl-primary-hover: #0056b3;
   --rdl-primary-active: #004085;
   --rdl-primary-light: #e3f2fd;
-  
+
   --rdl-background: #ffffff;
   --rdl-background-hover: #f8f9fa;
   --rdl-background-selected: #e3f2fd;
   --rdl-background-disabled: #f5f5f5;
-  
+
   --rdl-border: #dee2e6;
   --rdl-border-hover: #adb5bd;
   --rdl-border-focus: #007bff;
   --rdl-border-error: #dc3545;
-  
+
   --rdl-text: #212529;
   --rdl-text-muted: #6c757d;
   --rdl-text-disabled: #adb5bd;
   --rdl-text-inverse: #ffffff;
-  
+
   --rdl-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
   --rdl-shadow-hover: 0 0.25rem 0.5rem rgba(0, 0, 0, 0.15);
   --rdl-shadow-focus: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
-  
+
   /* Spacing */
   --rdl-spacing-xs: 0.25rem;
   --rdl-spacing-sm: 0.5rem;
   --rdl-spacing-md: 0.75rem;
   --rdl-spacing-lg: 1rem;
   --rdl-spacing-xl: 1.5rem;
-  
+
   /* Border radius */
   --rdl-border-radius: 0.375rem;
   --rdl-border-radius-sm: 0.25rem;
   --rdl-border-radius-lg: 0.5rem;
-  
+
   /* Typography */
-  --rdl-font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  --rdl-font-family:
+    -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue',
+    Arial, sans-serif;
   --rdl-font-size: 0.875rem;
   --rdl-font-size-sm: 0.75rem;
   --rdl-font-size-lg: 1rem;
@@ -45,26 +47,26 @@
   --rdl-font-weight-medium: 500;
   --rdl-font-weight-bold: 600;
   --rdl-line-height: 1.5;
-  
+
   /* Z-index */
   --rdl-z-index-dropdown: 1000;
   --rdl-z-index-modal: 1050;
   --rdl-z-index-tooltip: 1070;
-  
+
   /* Transitions */
   --rdl-transition: all 0.15s ease-in-out;
   --rdl-transition-fast: all 0.1s ease-in-out;
   --rdl-transition-slow: all 0.3s ease-in-out;
-  
+
   /* Component specific */
   --rdl-input-height: 2.375rem;
   --rdl-input-padding-x: 0.75rem;
   --rdl-input-padding-y: 0.375rem;
-  
+
   --rdl-calendar-width: 280px;
   --rdl-calendar-cell-size: 2rem;
   --rdl-calendar-header-height: 3rem;
-  
+
   /* Mobile adjustments */
   --rdl-mobile-calendar-width: 100%;
   --rdl-mobile-calendar-cell-size: 2.5rem;
@@ -73,54 +75,54 @@
 }
 
 /* Dark theme */
-[data-theme="dark"] {
+[data-theme='dark'] {
   --rdl-primary: #0d6efd;
   --rdl-primary-hover: #0b5ed7;
   --rdl-primary-active: #0a58ca;
   --rdl-primary-light: #1e3a5f;
-  
+
   --rdl-background: #1a1a1a;
   --rdl-background-hover: #2d2d2d;
   --rdl-background-selected: #1e3a5f;
   --rdl-background-disabled: #2d2d2d;
-  
+
   --rdl-border: #404040;
   --rdl-border-hover: #606060;
   --rdl-border-focus: #0d6efd;
   --rdl-border-error: #dc3545;
-  
+
   --rdl-text: #ffffff;
   --rdl-text-muted: #adb5bd;
   --rdl-text-disabled: #6c757d;
   --rdl-text-inverse: #000000;
-  
+
   --rdl-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.3);
   --rdl-shadow-hover: 0 0.25rem 0.5rem rgba(0, 0, 0, 0.4);
   --rdl-shadow-focus: 0 0 0 0.2rem rgba(13, 110, 253, 0.25);
 }
 
 /* High contrast theme */
-[data-theme="high-contrast"] {
+[data-theme='high-contrast'] {
   --rdl-primary: #0000ff;
   --rdl-primary-hover: #0000cc;
   --rdl-primary-active: #000099;
   --rdl-primary-light: #e6e6ff;
-  
+
   --rdl-background: #ffffff;
   --rdl-background-hover: #f0f0f0;
   --rdl-background-selected: #e6e6ff;
   --rdl-background-disabled: #f5f5f5;
-  
+
   --rdl-border: #000000;
   --rdl-border-hover: #000000;
   --rdl-border-focus: #0000ff;
   --rdl-border-error: #ff0000;
-  
+
   --rdl-text: #000000;
   --rdl-text-muted: #666666;
   --rdl-text-disabled: #999999;
   --rdl-text-inverse: #ffffff;
-  
+
   --rdl-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.5);
   --rdl-shadow-hover: 0 0.25rem 0.5rem rgba(0, 0, 0, 0.6);
   --rdl-shadow-focus: 0 0 0 0.2rem rgba(0, 0, 255, 0.5);

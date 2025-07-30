@@ -8,18 +8,18 @@ export class NativeDateAdapter implements DateAdapter<Date> {
 
     // Simple format mapping for common patterns
     const formatMap: Record<string, (date: Date) => string> = {
-      'YYYY': (d) => d.getFullYear().toString(),
-      'YY': (d) => d.getFullYear().toString().slice(-2),
-      'MM': (d) => (d.getMonth() + 1).toString().padStart(2, '0'),
-      'M': (d) => (d.getMonth() + 1).toString(),
-      'DD': (d) => d.getDate().toString().padStart(2, '0'),
-      'D': (d) => d.getDate().toString(),
-      'HH': (d) => d.getHours().toString().padStart(2, '0'),
-      'H': (d) => d.getHours().toString(),
-      'mm': (d) => d.getMinutes().toString().padStart(2, '0'),
-      'm': (d) => d.getMinutes().toString(),
-      'ss': (d) => d.getSeconds().toString().padStart(2, '0'),
-      's': (d) => d.getSeconds().toString(),
+      YYYY: (d) => d.getFullYear().toString(),
+      YY: (d) => d.getFullYear().toString().slice(-2),
+      MM: (d) => (d.getMonth() + 1).toString().padStart(2, '0'),
+      M: (d) => (d.getMonth() + 1).toString(),
+      DD: (d) => d.getDate().toString().padStart(2, '0'),
+      D: (d) => d.getDate().toString(),
+      HH: (d) => d.getHours().toString().padStart(2, '0'),
+      H: (d) => d.getHours().toString(),
+      mm: (d) => d.getMinutes().toString().padStart(2, '0'),
+      m: (d) => d.getMinutes().toString(),
+      ss: (d) => d.getSeconds().toString().padStart(2, '0'),
+      s: (d) => d.getSeconds().toString(),
     };
 
     let result = format;
@@ -30,7 +30,7 @@ export class NativeDateAdapter implements DateAdapter<Date> {
     return result;
   }
 
-  parse(dateString: string, format: string): Date | null {
+  parse(dateString: string, _format: string): Date | null {
     if (!dateString) {
       return null;
     }

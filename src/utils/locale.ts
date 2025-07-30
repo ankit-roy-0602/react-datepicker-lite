@@ -51,7 +51,7 @@ export const enUS: Locale = {
 
 export const defaultLocale = enUS;
 
-export function getLocale(code?: string): Locale {
+export function getLocale(_code?: string): Locale {
   // For now, return default locale
   // In future phases, we'll implement locale loading
   return defaultLocale;

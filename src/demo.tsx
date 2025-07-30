@@ -10,24 +10,29 @@ const Demo: React.FC = () => {
   return (
     <div style={{ padding: '2rem', maxWidth: '800px', margin: '0 auto' }}>
       <h1>React DatePicker Lite Demo</h1>
-      
+
       <div style={{ marginBottom: '2rem' }}>
         <h2>Basic DatePicker</h2>
-        <p>Selected: {selectedDate ? selectedDate.toLocaleDateString() : 'None'}</p>
+        <p>
+          Selected: {selectedDate ? selectedDate.toLocaleDateString() : 'None'}
+        </p>
         <DatePicker
           value={selectedDate}
           onChange={setSelectedDate}
-          placeholder="Select a date"
+          placeholder='Select a date'
         />
       </div>
 
       <div style={{ marginBottom: '2rem' }}>
         <h2>DatePicker with Default Value</h2>
-        <p>Selected: {selectedDate2 ? selectedDate2.toLocaleDateString() : 'None'}</p>
+        <p>
+          Selected:{' '}
+          {selectedDate2 ? selectedDate2.toLocaleDateString() : 'None'}
+        </p>
         <DatePicker
           value={selectedDate2}
           onChange={setSelectedDate2}
-          placeholder="Select a date"
+          placeholder='Select a date'
           showWeekNumbers
         />
       </div>
@@ -38,7 +43,7 @@ const Demo: React.FC = () => {
           value={new Date()}
           onChange={() => {}}
           disabled
-          placeholder="Disabled picker"
+          placeholder='Disabled picker'
         />
       </div>
 
@@ -49,7 +54,7 @@ const Demo: React.FC = () => {
           onChange={() => {}}
           minDate={new Date(2024, 0, 1)} // Jan 1, 2024
           maxDate={new Date(2024, 11, 31)} // Dec 31, 2024
-          placeholder="Select date in 2024"
+          placeholder='Select date in 2024'
         />
       </div>
 
@@ -58,8 +63,8 @@ const Demo: React.FC = () => {
         <DatePicker
           value={null}
           onChange={() => {}}
-          format="DD/MM/YYYY"
-          placeholder="DD/MM/YYYY format"
+          format='DD/MM/YYYY'
+          placeholder='DD/MM/YYYY format'
         />
       </div>
     </div>

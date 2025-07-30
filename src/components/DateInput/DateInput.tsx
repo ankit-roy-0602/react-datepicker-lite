@@ -5,7 +5,10 @@ import { defaultLocale } from '@/utils/locale';
 import './DateInput.css';
 
 export interface DateInputProps<T = Date>
-  extends Omit<DatePickerProps<T>, 'showWeekNumbers' | 'showToday' | 'closeOnSelect'> {
+  extends Omit<
+    DatePickerProps<T>,
+    'showWeekNumbers' | 'showToday' | 'closeOnSelect'
+  > {
   onCalendarToggle?: (isOpen: boolean) => void;
   isCalendarOpen?: boolean;
 }
@@ -14,7 +17,7 @@ export const DateInput = forwardRef<HTMLInputElement, DateInputProps>(
   (
     {
       value,
-      defaultValue,
+      defaultValue: _defaultValue,
       onChange,
       dateAdapter = nativeDateAdapter,
       format,
@@ -24,9 +27,9 @@ export const DateInput = forwardRef<HTMLInputElement, DateInputProps>(
       autoFocus = false,
       className = '',
       locale = defaultLocale,
-      minDate,
-      maxDate,
-      disabledDates,
+      minDate: _minDate,
+      maxDate: _maxDate,
+      disabledDates: _disabledDates,
       onFocus,
       onBlur,
       onKeyDown,
@@ -58,7 +61,10 @@ export const DateInput = forwardRef<HTMLInputElement, DateInputProps>(
           return;
         }
 
-        const parsedDate = dateAdapter.parse(newValue, format || locale.dateFormat);
+        const parsedDate = dateAdapter.parse(
+          newValue,
+          format || locale.dateFormat
+        );
         if (parsedDate && dateAdapter.isValid(parsedDate)) {
           onChange?.(parsedDate);
         }
@@ -79,10 +85,13 @@ export const DateInput = forwardRef<HTMLInputElement, DateInputProps>(
       (event: React.FocusEvent<HTMLInputElement>) => {
         setIsFocused(false);
         onBlur?.(event);
-        
+
         // Validate and format the input value on blur
         if (inputValue && value && dateAdapter.isValid(value)) {
-          const formattedValue = dateAdapter.format(value, format || locale.dateFormat);
+          const formattedValue = dateAdapter.format(
+            value,
+            format || locale.dateFormat
+          );
           setInputValue(formattedValue);
         }
       },
@@ -106,7 +115,10 @@ export const DateInput = forwardRef<HTMLInputElement, DateInputProps>(
     // Update input value when external value changes
     React.useEffect(() => {
       if (value && dateAdapter.isValid(value)) {
-        const formattedValue = dateAdapter.format(value, format || locale.dateFormat);
+        const formattedValue = dateAdapter.format(
+          value,
+          format || locale.dateFormat
+        );
         setInputValue(formattedValue);
       } else if (value === null) {
         setInputValue('');
@@ -125,10 +137,10 @@ export const DateInput = forwardRef<HTMLInputElement, DateInputProps>(
       .join(' ');
 
     return (
-      <div className="rdl-date-input-wrapper">
+      <div className='rdl-date-input-wrapper'>
         <input
           ref={ref}
-          type="text"
+          type='text'
           value={inputValue}
           onChange={handleInputChange}
           onFocus={handleFocus}
@@ -142,27 +154,30 @@ export const DateInput = forwardRef<HTMLInputElement, DateInputProps>(
           aria-label={ariaLabel || 'Date input'}
           aria-describedby={ariaDescribedBy}
           aria-expanded={isCalendarOpen}
-          aria-haspopup="dialog"
-          role="combobox"
+          aria-haspopup='dialog'
+          aria-controls={
+            isCalendarOpen ? `${id || 'datepicker'}-calendar` : undefined
+          }
+          role='combobox'
           id={id}
           {...rest}
         />
         <button
-          type="button"
-          className="rdl-date-input-toggle"
+          type='button'
+          className='rdl-date-input-toggle'
           onClick={() => onCalendarToggle?.(!isCalendarOpen)}
           disabled={disabled}
-          aria-label="Open calendar"
+          aria-label='Open calendar'
           tabIndex={-1}
         >
           <svg
-            width="16"
-            height="16"
-            viewBox="0 0 16 16"
-            fill="currentColor"
-            aria-hidden="true"
+            width='16'
+            height='16'
+            viewBox='0 0 16 16'
+            fill='currentColor'
+            aria-hidden='true'
           >
-            <path d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5zM2 2a1 1 0 0 0-1 1v1h14V3a1 1 0 0 0-1-1H2zM1 5v9a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V5H1z" />
+            <path d='M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5zM2 2a1 1 0 0 0-1 1v1h14V3a1 1 0 0 0-1-1H2zM1 5v9a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V5H1z' />
           </svg>
         </button>
       </div>

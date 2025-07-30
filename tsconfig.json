@@ -43,9 +43,7 @@
     "src/**/*.ts",
     "**/*.stories.tsx",
     "**/*.test.tsx",
-    "**/*.test.ts",
-    "vite.config.ts",
-    "vitest.config.ts"
+    "**/*.test.ts"
   ],
   "exclude": [
     "node_modules",

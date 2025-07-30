@@ -60,45 +60,46 @@ export interface DatePickerProps<T = Date> {
   value?: T | null;
   defaultValue?: T | null;
   onChange?: (date: T | null) => void;
-  
+
   // Date adapter
   dateAdapter?: DateAdapter<T>;
-  
+
   // Formatting
   format?: string;
   placeholder?: string;
-  
+
   // Constraints
   minDate?: T | null;
   maxDate?: T | null;
   disabledDates?: T[] | ((date: T) => boolean);
-  
+
   // Locale
   locale?: Locale;
-  
+
   // UI customization
   className?: string;
   disabled?: boolean;
   readOnly?: boolean;
   autoFocus?: boolean;
-  
+
   // Calendar behavior
   showWeekNumbers?: boolean;
   showToday?: boolean;
   closeOnSelect?: boolean;
-  
+
   // Accessibility
   'aria-label'?: string;
   'aria-describedby'?: string;
   id?: string;
-  
+
   // Events
   onFocus?: (event: React.FocusEvent<HTMLInputElement>) => void;
   onBlur?: (event: React.FocusEvent<HTMLInputElement>) => void;
   onKeyDown?: (event: React.KeyboardEvent<HTMLInputElement>) => void;
 }
 
-export interface RangePickerProps<T = Date> extends Omit<DatePickerProps<T>, 'value' | 'defaultValue' | 'onChange'> {
+export interface RangePickerProps<T = Date>
+  extends Omit<DatePickerProps<T>, 'value' | 'defaultValue' | 'onChange'> {
   value?: DateRange<T>;
   defaultValue?: DateRange<T>;
   onChange?: (range: DateRange<T>) => void;
@@ -109,27 +110,27 @@ export interface CalendarProps<T = Date> {
   // Current view
   currentDate: T;
   onCurrentDateChange: (date: T) => void;
-  
+
   // Selection
   selectedDate?: T | null;
   selectedRange?: DateRange<T>;
   onDateSelect: (date: T) => void;
-  
+
   // Date adapter
   dateAdapter: DateAdapter<T>;
-  
+
   // Constraints
   minDate?: T | null;
   maxDate?: T | null;
   disabledDates?: T[] | ((date: T) => boolean);
-  
+
   // Locale
   locale: Locale;
-  
+
   // UI
   showWeekNumbers?: boolean;
   className?: string;
-  
+
   // Range selection
   isRangeSelection?: boolean;
   rangeHoverDate?: T | null;
@@ -169,20 +170,20 @@ export interface ThemeVariables {
   text: string;
   textMuted: string;
   textDisabled: string;
-  
+
   // Spacing
   spacing: string;
   borderRadius: string;
-  
+
   // Typography
   fontFamily: string;
   fontSize: string;
   fontWeight: string;
-  
+
   // Shadows
   shadow: string;
   shadowHover: string;
-  
+
   // Z-index
   zIndex: number;
 }
