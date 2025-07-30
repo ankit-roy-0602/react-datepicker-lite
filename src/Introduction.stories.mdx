@@ -1,0 +1,73 @@
+import { Meta } from '@storybook/blocks';
+
+<Meta title="Introduction" />
+
+# React DatePicker Lite
+
+A lightweight, accessible, and customizable React date picker component with TypeScript support.
+
+## Features
+
+- 🪶 **Lightweight**: Minimal bundle size with no external dependencies
+- ♿ **Accessible**: Full keyboard navigation and screen reader support
+- 🎨 **Customizable**: Easy to style with CSS variables and custom themes
+- 📱 **Mobile-friendly**: Touch-friendly interface with responsive design
+- 🌍 **Internationalization**: Support for multiple locales and date formats
+- 📅 **Flexible**: Single date selection and date range selection
+- 🔧 **TypeScript**: Full TypeScript support with comprehensive type definitions
+- 🧪 **Well-tested**: Comprehensive test suite with high coverage
+
+## Components
+
+This library provides three main components:
+
+### DatePicker
+The main component that combines input and calendar functionality. Perfect for most use cases where you need a complete date picker solution.
+
+### Calendar
+A standalone calendar component for date selection. Use this when you need just the calendar part without the input field.
+
+### DateInput
+A date input component with calendar toggle. Use this when you need more control over the calendar display logic.
+
+## Getting Started
+
+```jsx
+import { DatePicker } from 'react-datepicker-lite';
+
+function App() {
+  const [date, setDate] = useState(null);
+
+  return (
+    <DatePicker
+      value={date}
+      onChange={setDate}
+      placeholder="Select a date"
+    />
+  );
+}
+```
+
+## Customization
+
+The components can be easily customized using CSS variables:
+
+```css
+.rdl-date-picker {
+  --rdl-primary-color: #007bff;
+  --rdl-border-radius: 8px;
+  --rdl-font-size: 14px;
+}
+```
+
+## Accessibility
+
+All components are built with accessibility in mind:
+
+- Full keyboard navigation support
+- ARIA labels and descriptions
+- Screen reader compatibility
+- Focus management
+- High contrast support
+
+Explore the stories to see all the available features and customization options!
