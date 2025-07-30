@@ -1,0 +1,76 @@
+version: 2
+updates:
+  # Enable version updates for npm
+  - package-ecosystem: "npm"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+      day: "monday"
+      time: "09:00"
+    open-pull-requests-limit: 10
+    reviewers:
+      - "ankit-roy-0602"
+    assignees:
+      - "ankit-roy-0602"
+    commit-message:
+      prefix: "chore"
+      prefix-development: "chore"
+      include: "scope"
+    labels:
+      - "dependencies"
+      - "automated"
+    ignore:
+      # Ignore major version updates for React (peer dependency)
+      - dependency-name: "react"
+        update-types: ["version-update:semver-major"]
+      - dependency-name: "react-dom"
+        update-types: ["version-update:semver-major"]
+    groups:
+      # Group testing dependencies
+      testing:
+        patterns:
+          - "@testing-library/*"
+          - "@vitest/*"
+          - "vitest"
+          - "jsdom"
+          - "axe-core"
+      # Group build tools
+      build-tools:
+        patterns:
+          - "vite*"
+          - "@vitejs/*"
+          - "rollup*"
+          - "terser"
+          - "typescript"
+      # Group linting and formatting
+      code-quality:
+        patterns:
+          - "eslint*"
+          - "@typescript-eslint/*"
+          - "prettier"
+          - "husky"
+          - "lint-staged"
+      # Group Storybook dependencies
+      storybook:
+        patterns:
+          - "@storybook/*"
+          - "storybook"
+
+  # Enable version updates for GitHub Actions
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+      day: "monday"
+      time: "09:00"
+    open-pull-requests-limit: 5
+    reviewers:
+      - "ankit-roy-0602"
+    assignees:
+      - "ankit-roy-0602"
+    commit-message:
+      prefix: "ci"
+      include: "scope"
+    labels:
+      - "github-actions"
+      - "automated"
