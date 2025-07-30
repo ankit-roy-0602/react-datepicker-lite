@@ -1,0 +1,208 @@
+.rdl-date-picker {
+  position: relative;
+  display: inline-block;
+  width: 100%;
+}
+
+.rdl-date-picker--disabled {
+  pointer-events: none;
+}
+
+.rdl-date-picker-dropdown {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  z-index: var(--rdl-z-index-dropdown);
+  margin-top: var(--rdl-spacing-xs);
+  background-color: var(--rdl-background);
+  border: 1px solid var(--rdl-border);
+  border-radius: var(--rdl-border-radius);
+  box-shadow: var(--rdl-shadow-hover);
+  animation: rdl-dropdown-enter 0.15s ease-out;
+}
+
+.rdl-date-picker-footer {
+  padding: var(--rdl-spacing-md);
+  border-top: 1px solid var(--rdl-border);
+  background-color: var(--rdl-background-hover);
+  border-radius: 0 0 var(--rdl-border-radius) var(--rdl-border-radius);
+}
+
+.rdl-date-picker-today-button {
+  width: 100%;
+  padding: var(--rdl-spacing-sm) var(--rdl-spacing-md);
+  background: none;
+  border: 1px solid var(--rdl-border);
+  border-radius: var(--rdl-border-radius-sm);
+  color: var(--rdl-text);
+  font-family: var(--rdl-font-family);
+  font-size: var(--rdl-font-size);
+  font-weight: var(--rdl-font-weight-medium);
+  cursor: pointer;
+  transition: var(--rdl-transition);
+}
+
+.rdl-date-picker-today-button:hover {
+  background-color: var(--rdl-background-selected);
+  border-color: var(--rdl-border-hover);
+}
+
+.rdl-date-picker-today-button:focus {
+  outline: none;
+  background-color: var(--rdl-background-selected);
+  border-color: var(--rdl-border-focus);
+  box-shadow: var(--rdl-shadow-focus);
+}
+
+.rdl-date-picker-today-button:active {
+  background-color: var(--rdl-primary-light);
+  border-color: var(--rdl-primary);
+}
+
+/* Dropdown animations */
+@keyframes rdl-dropdown-enter {
+  from {
+    opacity: 0;
+    transform: translateY(-8px) scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* Mobile optimizations */
+@media (max-width: 768px) {
+  .rdl-date-picker-dropdown {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 90vw;
+    max-width: 400px;
+    margin-top: 0;
+    z-index: var(--rdl-z-index-modal);
+    animation: rdl-modal-enter 0.2s ease-out;
+  }
+
+  .rdl-date-picker-dropdown::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: -1;
+  }
+
+  .rdl-date-picker-footer {
+    padding: var(--rdl-spacing-lg);
+  }
+
+  .rdl-date-picker-today-button {
+    padding: var(--rdl-spacing-md) var(--rdl-spacing-lg);
+    font-size: var(--rdl-font-size-lg);
+    min-height: var(--rdl-mobile-touch-target);
+  }
+}
+
+@keyframes rdl-modal-enter {
+  from {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+  }
+}
+
+/* Positioning adjustments for different screen sizes */
+@media (min-width: 769px) {
+  .rdl-date-picker-dropdown {
+    min-width: var(--rdl-calendar-width);
+  }
+
+  /* Adjust position if dropdown would go off-screen */
+  .rdl-date-picker--dropdown-right .rdl-date-picker-dropdown {
+    left: auto;
+    right: 0;
+  }
+
+  .rdl-date-picker--dropdown-up .rdl-date-picker-dropdown {
+    top: auto;
+    bottom: 100%;
+    margin-top: 0;
+    margin-bottom: var(--rdl-spacing-xs);
+  }
+}
+
+/* High contrast mode */
+@media (prefers-contrast: high) {
+  .rdl-date-picker-dropdown {
+    border-width: 2px;
+  }
+
+  .rdl-date-picker-today-button {
+    border-width: 2px;
+  }
+
+  .rdl-date-picker-today-button:focus {
+    border-width: 3px;
+  }
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .rdl-date-picker-dropdown {
+    animation: none;
+  }
+
+  .rdl-date-picker-today-button {
+    transition: none;
+  }
+
+  @media (max-width: 768px) {
+    .rdl-date-picker-dropdown {
+      animation: none;
+    }
+  }
+}
+
+/* RTL support */
+[dir="rtl"] .rdl-date-picker-dropdown {
+  left: auto;
+  right: 0;
+}
+
+[dir="rtl"] .rdl-date-picker--dropdown-right .rdl-date-picker-dropdown {
+  left: 0;
+  right: auto;
+}
+
+/* Focus management */
+.rdl-date-picker--open .rdl-date-input {
+  border-color: var(--rdl-border-focus);
+  box-shadow: var(--rdl-shadow-focus);
+}
+
+/* Ensure dropdown is above other elements */
+.rdl-date-picker-dropdown {
+  isolation: isolate;
+}
+
+/* Loading state (for future use) */
+.rdl-date-picker--loading .rdl-date-picker-dropdown {
+  pointer-events: none;
+  opacity: 0.7;
+}
+
+/* Error state (for future use) */
+.rdl-date-picker--error .rdl-date-input {
+  border-color: var(--rdl-border-error);
+}
+
+.rdl-date-picker--error .rdl-date-input:focus {
+  box-shadow: 0 0 0 0.2rem rgba(220, 53, 69, 0.25);
+}

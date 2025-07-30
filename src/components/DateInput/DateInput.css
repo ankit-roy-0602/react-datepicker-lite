@@ -1,0 +1,155 @@
+.rdl-date-input-wrapper {
+  position: relative;
+  display: inline-block;
+  width: 100%;
+}
+
+.rdl-date-input {
+  width: 100%;
+  height: var(--rdl-input-height);
+  padding: var(--rdl-input-padding-y) var(--rdl-input-padding-x);
+  padding-right: calc(var(--rdl-input-padding-x) + 2rem); /* Space for toggle button */
+  font-family: var(--rdl-font-family);
+  font-size: var(--rdl-font-size);
+  font-weight: var(--rdl-font-weight);
+  line-height: var(--rdl-line-height);
+  color: var(--rdl-text);
+  background-color: var(--rdl-background);
+  border: 1px solid var(--rdl-border);
+  border-radius: var(--rdl-border-radius);
+  transition: var(--rdl-transition);
+  box-sizing: border-box;
+}
+
+.rdl-date-input:hover:not(:disabled):not(:read-only) {
+  border-color: var(--rdl-border-hover);
+}
+
+.rdl-date-input:focus {
+  outline: none;
+  border-color: var(--rdl-border-focus);
+  box-shadow: var(--rdl-shadow-focus);
+}
+
+.rdl-date-input--focused {
+  border-color: var(--rdl-border-focus);
+  box-shadow: var(--rdl-shadow-focus);
+}
+
+.rdl-date-input--disabled {
+  background-color: var(--rdl-background-disabled);
+  color: var(--rdl-text-disabled);
+  cursor: not-allowed;
+}
+
+.rdl-date-input--readonly {
+  background-color: var(--rdl-background-disabled);
+  cursor: default;
+}
+
+.rdl-date-input--calendar-open {
+  border-color: var(--rdl-border-focus);
+  box-shadow: var(--rdl-shadow-focus);
+}
+
+.rdl-date-input::placeholder {
+  color: var(--rdl-text-muted);
+  opacity: 1;
+}
+
+.rdl-date-input-toggle {
+  position: absolute;
+  top: 50%;
+  right: var(--rdl-spacing-sm);
+  transform: translateY(-50%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.5rem;
+  height: 1.5rem;
+  padding: 0;
+  background: none;
+  border: none;
+  color: var(--rdl-text-muted);
+  cursor: pointer;
+  transition: var(--rdl-transition);
+  border-radius: var(--rdl-border-radius-sm);
+}
+
+.rdl-date-input-toggle:hover:not(:disabled) {
+  color: var(--rdl-text);
+  background-color: var(--rdl-background-hover);
+}
+
+.rdl-date-input-toggle:focus {
+  outline: none;
+  color: var(--rdl-text);
+  background-color: var(--rdl-background-hover);
+  box-shadow: var(--rdl-shadow-focus);
+}
+
+.rdl-date-input-toggle:disabled {
+  color: var(--rdl-text-disabled);
+  cursor: not-allowed;
+}
+
+.rdl-date-input-toggle svg {
+  width: 1rem;
+  height: 1rem;
+  flex-shrink: 0;
+}
+
+/* Mobile optimizations */
+@media (max-width: 768px) {
+  .rdl-date-input {
+    height: var(--rdl-mobile-input-height);
+    font-size: var(--rdl-font-size-lg);
+  }
+
+  .rdl-date-input-toggle {
+    width: var(--rdl-mobile-touch-target);
+    height: var(--rdl-mobile-touch-target);
+    right: 0;
+  }
+
+  .rdl-date-input-toggle svg {
+    width: 1.25rem;
+    height: 1.25rem;
+  }
+}
+
+/* High contrast mode */
+@media (prefers-contrast: high) {
+  .rdl-date-input {
+    border-width: 2px;
+  }
+
+  .rdl-date-input:focus {
+    border-width: 3px;
+  }
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .rdl-date-input,
+  .rdl-date-input-toggle {
+    transition: none;
+  }
+}
+
+/* RTL support */
+[dir="rtl"] .rdl-date-input {
+  padding-left: calc(var(--rdl-input-padding-x) + 2rem);
+  padding-right: var(--rdl-input-padding-x);
+}
+
+[dir="rtl"] .rdl-date-input-toggle {
+  right: auto;
+  left: var(--rdl-spacing-sm);
+}
+
+@media (max-width: 768px) {
+  [dir="rtl"] .rdl-date-input-toggle {
+    left: 0;
+  }
+}
