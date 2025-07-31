@@ -27,7 +27,7 @@
       "@/adapters/*": ["src/adapters/*"],
       "@/styles/*": ["src/styles/*"]
     },
-    "types": ["vitest/globals", "@testing-library/jest-dom"],
+    "types": ["jest", "@testing-library/jest-dom"],
     "noUnusedLocals": true,
     "noUnusedParameters": true,
     "exactOptionalPropertyTypes": true,
