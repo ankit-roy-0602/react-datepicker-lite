@@ -1,6 +1,23 @@
 import '@testing-library/jest-dom';
 import { vi } from 'vitest';
 
+// Polyfill for crypto.getRandomValues for Node.js 16.x compatibility
+if (typeof globalThis.crypto === 'undefined') {
+  const { webcrypto } = require('node:crypto');
+  globalThis.crypto = webcrypto as Crypto;
+}
+
+// Fallback for older Node.js versions that don't have webcrypto
+if (typeof globalThis.crypto?.getRandomValues === 'undefined') {
+  const crypto = require('node:crypto');
+  globalThis.crypto = {
+    ...globalThis.crypto,
+    getRandomValues: (array: Uint8Array) => {
+      return crypto.randomFillSync(array);
+    },
+  } as Crypto;
+}
+
 // Mock IntersectionObserver
 global.IntersectionObserver = vi.fn().mockImplementation(() => ({
   disconnect: vi.fn(),
