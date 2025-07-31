@@ -25,6 +25,7 @@
     "type-check": "tsc --noEmit",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build",
+    "size": "npm run build && bundlesize",
     "size:analyze": "vite-bundle-analyzer dist/stats.json",
     "prepare": "husky install",
     "prepublishOnly": "npm run build && npm run test:run",
@@ -93,6 +94,7 @@
     "jest-environment-jsdom": "^29.7.0",
     "ts-jest": "^29.1.2",
     "axe-core": "^4.8.3",
+    "bundlesize": "^0.18.1",
     "eslint": "^8.55.0",
     "eslint-config-prettier": "^9.1.0",
     "eslint-plugin-jsx-a11y": "^6.8.0",
@@ -141,5 +143,15 @@
     "Edge >= 100",
     "iOS >= 15.6",
     "Android >= 100"
+  ],
+  "bundlesize": [
+    {
+      "path": "./dist/index.umd.js",
+      "maxSize": "50 kB"
+    },
+    {
+      "path": "./dist/index.esm.js",
+      "maxSize": "50 kB"
+    }
   ]
 }
