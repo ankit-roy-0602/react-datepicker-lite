@@ -107,13 +107,13 @@
     "prettier": "^3.1.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "rollup-plugin-visualizer": "^5.12.0",
+    "rollup-plugin-visualizer": "^6.0.3",
     "semantic-release": "^22.0.12",
     "storybook": "^8.6.14",
     "terser": "^5.43.1",
     "typescript": "^5.3.3",
-    "vite": "^5.4.19",
-    "vite-bundle-analyzer": "^0.7.0"
+    "vite": "^7.0.6",
+    "vite-bundle-analyzer": "^1.1.0"
   },
   "optionalDependencies": {
     "moment": "^2.29.4"
