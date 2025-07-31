@@ -230,6 +230,187 @@ React DatePicker Lite is designed to be lightweight:
 - **Minified + Gzipped**: ~8KB
 - **Zero runtime dependencies**
 
+## ✅ Installation Verification
+
+To verify that the package is working correctly, create a simple test component:
+
+```tsx
+import React, { useState } from 'react';
+import { DatePicker } from 'react-datepicker-lite';
+import 'react-datepicker-lite/dist/index.css';
+
+function TestDatePicker() {
+  const [date, setDate] = useState<Date | null>(null);
+
+  return (
+    <div style={{ padding: '20px' }}>
+      <h3>DatePicker Test</h3>
+      <DatePicker
+        value={date}
+        onChange={setDate}
+        placeholder="Click to select a date"
+      />
+      {date && (
+        <p>Selected: {date.toLocaleDateString()}</p>
+      )}
+    </div>
+  );
+}
+
+export default TestDatePicker;
+```
+
+If the component renders and you can select dates, the installation is successful!
+
+## 🔧 Troubleshooting
+
+### Common Issues and Solutions
+
+#### 1. "Module not found" or Import Errors
+
+**Problem**: Cannot import the DatePicker component.
+
+**Solutions**:
+```tsx
+// ✅ Correct import
+import { DatePicker } from 'react-datepicker-lite';
+
+// ❌ Incorrect - don't use default import
+import DatePicker from 'react-datepicker-lite';
+
+// ✅ Import multiple components
+import { DatePicker, Calendar, DateInput } from 'react-datepicker-lite';
+```
+
+#### 2. Styles Not Applied
+
+**Problem**: DatePicker appears unstyled or broken.
+
+**Solution**: Make sure to import the CSS file:
+```tsx
+// ✅ Required CSS import
+import 'react-datepicker-lite/dist/index.css';
+
+// Or in your main CSS file
+@import 'react-datepicker-lite/dist/index.css';
+```
+
+#### 3. TypeScript Errors
+
+**Problem**: TypeScript compilation errors.
+
+**Solutions**:
+```tsx
+// ✅ Proper typing
+const [date, setDate] = useState<Date | null>(null);
+
+// ✅ Event handler typing
+const handleDateChange = (newDate: Date | null) => {
+  setDate(newDate);
+};
+
+// ✅ Component props typing
+import { DatePickerProps } from 'react-datepicker-lite';
+```
+
+#### 4. Calendar Not Opening
+
+**Problem**: Clicking the input doesn't open the calendar.
+
+**Possible causes and solutions**:
+- **CSS conflicts**: Check if other CSS is overriding styles
+- **Event propagation**: Ensure no parent elements are stopping events
+- **Disabled state**: Check if `disabled` prop is set to `true`
+
+```tsx
+// ✅ Debug by adding event handlers
+<DatePicker
+  value={date}
+  onChange={setDate}
+  onFocus={() => console.log('Input focused')}
+  onBlur={() => console.log('Input blurred')}
+/>
+```
+
+#### 5. Date Format Issues
+
+**Problem**: Dates display in wrong format.
+
+**Solution**: Use the `format` prop with proper format strings:
+```tsx
+// ✅ Common formats
+<DatePicker format="MM/DD/YYYY" />  // US format
+<DatePicker format="DD/MM/YYYY" />  // European format
+<DatePicker format="YYYY-MM-DD" />  // ISO format
+```
+
+#### 6. Build/Bundle Issues
+
+**Problem**: Module doesn't work in production build.
+
+**Solutions**:
+- Ensure you're importing from the correct path
+- Check if your bundler supports ES modules
+- For older bundlers, try importing the UMD version:
+
+```tsx
+// For older bundlers
+import { DatePicker } from 'react-datepicker-lite/dist/index.umd.js';
+```
+
+#### 7. React Version Compatibility
+
+**Problem**: Compatibility issues with React version.
+
+**Requirements**:
+- React >= 16.8.0 (hooks support required)
+- React-DOM >= 16.8.0
+
+```bash
+# Check your React version
+npm list react react-dom
+
+# Update if needed
+npm install react@latest react-dom@latest
+```
+
+#### 8. SSR (Server-Side Rendering) Issues
+
+**Problem**: Component breaks during server-side rendering.
+
+**Solution**: Use dynamic imports for SSR frameworks:
+
+```tsx
+// Next.js example
+import dynamic from 'next/dynamic';
+
+const DatePicker = dynamic(
+  () => import('react-datepicker-lite').then(mod => ({ default: mod.DatePicker })),
+  { ssr: false }
+);
+```
+
+### Getting Help
+
+If you're still experiencing issues:
+
+1. **Check the console**: Look for error messages in browser dev tools
+2. **Verify imports**: Ensure all imports are correct
+3. **Test isolation**: Try the component in a minimal setup
+4. **Check versions**: Ensure compatible React and Node.js versions
+5. **Create an issue**: [Report bugs on GitHub](https://github.com/ankit-roy-0602/react-datepicker-lite/issues)
+
+### Debug Mode
+
+Enable debug logging by setting a global variable:
+
+```tsx
+// Add this before importing the component
+(window as any).__RDL_DEBUG__ = true;
+
+import { DatePicker } from 'react-datepicker-lite';
+```
+
 ## 🤝 Contributing
 
 We welcome contributions! Please see our [Contributing Guide](CONTRIBUTING.md) for details.

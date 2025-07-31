@@ -8,15 +8,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 ### Added
-- GitHub workflows for CI/CD, PR checks, and automated releases
-- Comprehensive issue templates for bug reports, feature requests, and questions
-- Pull request template with detailed checklist
-- Contributing guidelines and code of conduct
-- Security policy and vulnerability reporting process
-- Changelog for tracking project changes
 
 ### Changed
-- Improved project documentation structure
 
 ### Deprecated
 
@@ -25,6 +18,33 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Fixed
 
 ### Security
+
+## [1.0.2] - 2025-01-31
+
+### Added
+- Comprehensive troubleshooting section in README with common issues and solutions
+- Installation verification guide with test component example
+- Detailed usage examples document (USAGE_EXAMPLES.md) covering:
+  - Basic and advanced usage patterns
+  - Form integration with React Hook Form and Formik
+  - Framework integration (Next.js, Gatsby, Vite)
+  - Real-world use cases (booking systems, event schedulers, age calculator)
+  - Testing examples with Jest and Cypress
+  - Performance optimization techniques
+- Debug mode instructions for easier troubleshooting
+- SSR (Server-Side Rendering) integration examples
+- Mobile and accessibility best practices
+
+### Changed
+- Enhanced README.md with better organization and comprehensive troubleshooting
+- Updated package.json to include USAGE_EXAMPLES.md in published files
+- Improved documentation structure for better user experience
+
+### Fixed
+- Added solutions for common import and styling issues
+- Clarified correct import syntax to prevent user confusion
+- Added guidance for TypeScript compilation errors
+- Provided solutions for calendar not opening issues
 
 ## [1.0.1] - 2025-01-31
 
