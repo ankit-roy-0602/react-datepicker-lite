@@ -4,6 +4,11 @@ on:
   pull_request:
     types: [opened, synchronize, reopened, ready_for_review]
 
+permissions:
+  contents: read
+  issues: write
+  pull-requests: write
+
 jobs:
   pr-checks:
     runs-on: ubuntu-latest
