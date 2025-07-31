@@ -9,10 +9,10 @@ describe('DatePicker', () => {
 
   it('displays placeholder text', () => {
     render(
-      <DatePicker 
-        value={null} 
-        onChange={() => {}} 
-        placeholder="Select a date" 
+      <DatePicker
+        value={null}
+        onChange={() => {}}
+        placeholder='Select a date'
       />
     );
     expect(screen.getByPlaceholderText('Select a date')).toBeInTheDocument();

@@ -1,49 +1,70 @@
 import '@testing-library/jest-dom';
-import { vi } from 'vitest';
 
 // Mock IntersectionObserver
-global.IntersectionObserver = vi.fn().mockImplementation(() => ({
-  disconnect: vi.fn(),
-  observe: vi.fn(),
-  unobserve: vi.fn(),
-  root: null,
-  rootMargin: '',
-  thresholds: [],
-  takeRecords: vi.fn(() => []),
-}));
+interface MockIntersectionObserver {
+  disconnect(): void;
+  observe(): void;
+  unobserve(): void;
+  root: null;
+  rootMargin: string;
+  thresholds: number[];
+  takeRecords(): unknown[];
+}
+
+globalThis.IntersectionObserver = class IntersectionObserver
+  implements MockIntersectionObserver
+{
+  constructor() {}
+  disconnect() {}
+  observe() {}
+  unobserve() {}
+  root = null;
+  rootMargin = '';
+  thresholds = [];
+  takeRecords() {
+    return [];
+  }
+} as unknown as typeof IntersectionObserver;
 
 // Mock ResizeObserver
-global.ResizeObserver = vi.fn().mockImplementation(() => ({
-  disconnect: vi.fn(),
-  observe: vi.fn(),
-  unobserve: vi.fn(),
-}));
+interface MockResizeObserver {
+  disconnect(): void;
+  observe(): void;
+  unobserve(): void;
+}
+
+globalThis.ResizeObserver = class ResizeObserver implements MockResizeObserver {
+  constructor() {}
+  disconnect() {}
+  observe() {}
+  unobserve() {}
+} as unknown as typeof ResizeObserver;
 
 // Mock matchMedia
 Object.defineProperty(window, 'matchMedia', {
   writable: true,
-  value: vi.fn().mockImplementation((query: string) => ({
+  value: (query: string) => ({
     matches: false,
     media: query,
     onchange: null,
-    addListener: vi.fn(), // deprecated
-    removeListener: vi.fn(), // deprecated
-    addEventListener: vi.fn(),
-    removeEventListener: vi.fn(),
-    dispatchEvent: vi.fn(),
-  })),
+    addListener: () => {}, // deprecated
+    removeListener: () => {}, // deprecated
+    addEventListener: () => {},
+    removeEventListener: () => {},
+    dispatchEvent: () => {},
+  }),
 });
 
 // Mock scrollTo
 Object.defineProperty(window, 'scrollTo', {
   writable: true,
-  value: vi.fn(),
+  value: () => {},
 });
 
 // Mock getComputedStyle
 Object.defineProperty(window, 'getComputedStyle', {
   writable: true,
-  value: vi.fn().mockImplementation(() => ({
-    getPropertyValue: vi.fn(),
-  })),
+  value: () => ({
+    getPropertyValue: () => '',
+  }),
 });

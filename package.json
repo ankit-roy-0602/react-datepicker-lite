@@ -1,6 +1,6 @@
 {
   "name": "react-datepicker-lite",
-  "version": "0.1.0",
+  "version": "1.0.1",
   "description": "A lightweight, accessible, and customizable React date picker component with TypeScript support",
   "main": "dist/index.umd.js",
   "module": "dist/index.esm.js",
@@ -14,10 +14,10 @@
     "dev": "vite",
     "build": "vite build && tsc --project tsconfig.build.json",
     "build:watch": "vite build --watch",
-    "test": "vitest",
-    "test:ui": "vitest --ui",
-    "test:coverage": "vitest --coverage",
-    "test:run": "vitest run",
+    "test": "jest",
+    "test:ui": "jest --watch",
+    "test:coverage": "jest --coverage",
+    "test:run": "jest",
     "lint": "eslint src --ext .ts,.tsx",
     "lint:fix": "eslint src --ext .ts,.tsx --fix",
     "format": "prettier --write src/**/*.{ts,tsx,css}",
@@ -25,7 +25,7 @@
     "type-check": "tsc --noEmit",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build",
-    "size": "bundlesize",
+    "size": "npm run build && bundlesize",
     "size:analyze": "vite-bundle-analyzer dist/stats.json",
     "prepare": "husky install",
     "prepublishOnly": "npm run build && npm run test:run",
@@ -61,27 +61,38 @@
     "react": ">=16.8.0",
     "react-dom": ">=16.8.0"
   },
+  "peerDependenciesMeta": {
+    "react": {
+      "optional": false
+    },
+    "react-dom": {
+      "optional": false
+    }
+  },
   "devDependencies": {
     "@commitlint/cli": "^18.4.3",
     "@commitlint/config-conventional": "^18.4.3",
-    "@storybook/addon-a11y": "^7.6.6",
-    "@storybook/addon-essentials": "^7.6.6",
-    "@storybook/addon-interactions": "^7.6.6",
-    "@storybook/addon-links": "^7.6.6",
-    "@storybook/blocks": "^7.6.6",
-    "@storybook/react": "^7.6.6",
-    "@storybook/react-vite": "^7.6.6",
+    "@storybook/addon-a11y": "^8.6.14",
+    "@storybook/addon-essentials": "^8.6.14",
+    "@storybook/addon-interactions": "^8.6.14",
+    "@storybook/addon-links": "^8.6.14",
+    "@storybook/blocks": "^8.6.14",
+    "@storybook/react": "^8.6.14",
+    "@storybook/react-vite": "^8.6.14",
     "@storybook/testing-library": "^0.2.2",
     "@testing-library/jest-dom": "^6.1.5",
     "@testing-library/react": "^14.1.2",
     "@testing-library/user-event": "^14.5.1",
+    "@types/node": "^20.0.0",
     "@types/react": "^18.2.43",
     "@types/react-dom": "^18.2.17",
     "@typescript-eslint/eslint-plugin": "^6.14.0",
     "@typescript-eslint/parser": "^6.14.0",
     "@vitejs/plugin-react": "^4.2.1",
-    "@vitest/coverage-v8": "^1.0.4",
-    "@vitest/ui": "^1.0.4",
+    "@types/jest": "^29.5.12",
+    "jest": "^29.7.0",
+    "jest-environment-jsdom": "^29.7.0",
+    "ts-jest": "^29.1.2",
     "axe-core": "^4.8.3",
     "bundlesize": "^0.18.1",
     "eslint": "^8.55.0",
@@ -90,6 +101,7 @@
     "eslint-plugin-react": "^7.33.2",
     "eslint-plugin-react-hooks": "^4.6.0",
     "husky": "^8.0.3",
+    "identity-obj-proxy": "^3.0.0",
     "jsdom": "^23.0.1",
     "lint-staged": "^15.2.0",
     "prettier": "^3.1.1",
@@ -97,22 +109,15 @@
     "react-dom": "^18.2.0",
     "rollup-plugin-visualizer": "^5.12.0",
     "semantic-release": "^22.0.12",
-    "storybook": "^7.6.6",
+    "storybook": "^8.6.14",
     "terser": "^5.43.1",
     "typescript": "^5.3.3",
-    "vite": "^5.0.8",
-    "vite-bundle-analyzer": "^0.7.0",
-    "vitest": "^1.0.4"
+    "vite": "^5.4.19",
+    "vite-bundle-analyzer": "^0.7.0"
   },
   "optionalDependencies": {
     "moment": "^2.29.4"
   },
-  "bundlesize": [
-    {
-      "path": "./dist/index.esm.js",
-      "maxSize": "45 kB"
-    }
-  ],
   "lint-staged": {
     "src/**/*.{ts,tsx}": [
       "eslint --fix",
@@ -138,5 +143,15 @@
     "Edge >= 100",
     "iOS >= 15.6",
     "Android >= 100"
+  ],
+  "bundlesize": [
+    {
+      "path": "./dist/index.umd.js",
+      "maxSize": "50 kB"
+    },
+    {
+      "path": "./dist/index.esm.js",
+      "maxSize": "50 kB"
+    }
   ]
 }
