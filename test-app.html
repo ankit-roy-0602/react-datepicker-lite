@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>React DatePicker Lite - Test App</title>
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <link rel="stylesheet" href="./dist/index.css">
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            line-height: 1.6;
+        }
+        .test-section {
+            margin: 30px 0;
+            padding: 20px;
+            border: 1px solid #e1e5e9;
+            border-radius: 8px;
+            background: #f8f9fa;
+        }
+        .test-section h3 {
+            margin-top: 0;
+            color: #2d3748;
+        }
+        .status {
+            padding: 10px;
+            border-radius: 4px;
+            margin: 10px 0;
+            font-weight: 500;
+        }
+        .status.success {
+            background: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+        .status.error {
+            background: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+        .date-picker-container {
+            margin: 15px 0;
+        }
+    </style>
+</head>
+<body>
+    <h1>React DatePicker Lite - JSX Runtime Fix Test</h1>
+    
+    <div class="test-section">
+        <h3>Library Import Test</h3>
+        <div id="import-status" class="status">Testing library import...</div>
+    </div>
+
+    <div class="test-section">
+        <h3>Component Rendering Test</h3>
+        <div id="render-status" class="status">Testing component rendering...</div>
+        <div id="datepicker-container" class="date-picker-container"></div>
+    </div>
+
+    <div class="test-section">
+        <h3>Console Errors</h3>
+        <div id="console-errors" class="status">Monitoring for console errors...</div>
+        <div id="error-list"></div>
+    </div>
+
+    <script type="text/babel">
+        const { useState, useEffect } = React;
+        
+        // Monitor console errors
+        const originalError = console.error;
+        const errors = [];
+        
+        console.error = function(...args) {
+            errors.push(args.join(' '));
+            originalError.apply(console, args);
+            updateErrorDisplay();
+        };
+
+        function updateErrorDisplay() {
+            const errorContainer = document.getElementById('console-errors');
+            const errorList = document.getElementById('error-list');
+            
+            if (errors.length === 0) {
+                errorContainer.className = 'status success';
+                errorContainer.textContent = '✅ No console errors detected';
+                errorList.innerHTML = '';
+            } else {
+                errorContainer.className = 'status error';
+                errorContainer.textContent = `❌ ${errors.length} console error(s) detected`;
+                errorList.innerHTML = errors.map(error => `<div style="margin: 5px 0; padding: 5px; background: white; border-radius: 3px; font-family: monospace; font-size: 12px;">${error}</div>`).join('');
+            }
+        }
+
+        // Test library import
+        function testLibraryImport() {
+            try {
+                // Import the library
+                const script = document.createElement('script');
+                script.src = './dist/index.umd.js';
+                script.onload = function() {
+                    try {
+                        if (window.ReactDatePickerLite && window.ReactDatePickerLite.DatePicker) {
+                            document.getElementById('import-status').className = 'status success';
+                            document.getElementById('import-status').textContent = '✅ Library imported successfully';
+                            testComponentRendering();
+                        } else {
+                            throw new Error('DatePicker component not found in library export');
+                        }
+                    } catch (error) {
+                        document.getElementById('import-status').className = 'status error';
+                        document.getElementById('import-status').textContent = `❌ Import test failed: ${error.message}`;
+                    }
+                };
+                script.onerror = function() {
+                    document.getElementById('import-status').className = 'status error';
+                    document.getElementById('import-status').textContent = '❌ Failed to load library script';
+                };
+                document.head.appendChild(script);
+            } catch (error) {
+                document.getElementById('import-status').className = 'status error';
+                document.getElementById('import-status').textContent = `❌ Import test failed: ${error.message}`;
+            }
+        }
+
+        // Test component rendering
+        function testComponentRendering() {
+            try {
+                const { DatePicker } = window.ReactDatePickerLite;
+                
+                function TestApp() {
+                    const [selectedDate, setSelectedDate] = useState(null);
+                    
+                    return React.createElement('div', null, [
+                        React.createElement('p', { key: 'label' }, 'Select a date:'),
+                        React.createElement(DatePicker, {
+                            key: 'datepicker',
+                            value: selectedDate,
+                            onChange: setSelectedDate,
+                            placeholder: 'Choose a date...'
+                        }),
+                        selectedDate && React.createElement('p', { key: 'selected' }, `Selected: ${selectedDate.toLocaleDateString()}`)
+                    ]);
+                }
+
+                const container = document.getElementById('datepicker-container');
+                const root = ReactDOM.createRoot(container);
+                root.render(React.createElement(TestApp));
+                
+                // Wait a bit to see if any errors occur during rendering
+                setTimeout(() => {
+                    if (errors.length === 0) {
+                        document.getElementById('render-status').className = 'status success';
+                        document.getElementById('render-status').textContent = '✅ Component rendered successfully';
+                    } else {
+                        document.getElementById('render-status').className = 'status error';
+                        document.getElementById('render-status').textContent = '❌ Component rendering failed (check console errors)';
+                    }
+                }, 100);
+                
+            } catch (error) {
+                document.getElementById('render-status').className = 'status error';
+                document.getElementById('render-status').textContent = `❌ Rendering test failed: ${error.message}`;
+            }
+        }
+
+        // Initialize error display
+        updateErrorDisplay();
+        
+        // Start tests
+        testLibraryImport();
+    </script>
+</body>
+</html>

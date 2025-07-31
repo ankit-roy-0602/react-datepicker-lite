@@ -26,6 +26,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Security
 
+## [1.0.1] - 2025-01-31
+
+### Fixed
+- Fixed React JSX runtime bundling issue that caused "Cannot read properties of undefined (reading 'ReactCurrentDispatcher')" error
+- Externalized `react/jsx-runtime` dependency to prevent conflicts with consuming applications
+- Reduced bundle size from ~58KB to ~21KB for ESM build by properly externalizing React dependencies
+
+### Changed
+- Updated Vite build configuration to properly externalize React JSX runtime
+- Added explicit peer dependency metadata for better dependency resolution
+
 ## [1.0.0] - 2025-01-30
 
 ### Added

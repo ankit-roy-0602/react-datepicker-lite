@@ -13,6 +13,9 @@ export default defineConfig({
       brotliSize: true,
     }) as any, // Type assertion to fix compatibility issue
   ],
+  define: {
+    'process.env.NODE_ENV': JSON.stringify('production'),
+  },
   resolve: {
     alias: {
       '@': resolve(__dirname, 'src'),

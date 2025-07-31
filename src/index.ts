@@ -28,4 +28,4 @@ export { NativeDateAdapter, nativeDateAdapter } from './adapters/native';
 export { enUS, defaultLocale, getLocale } from './utils/locale';
 
 // Version
-export const version = '1.0.0';
+export const version = '1.0.1';
