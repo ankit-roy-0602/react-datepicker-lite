@@ -24,7 +24,10 @@
             "path": "dist/*.tgz",
             "label": "Distribution"
           }
-        ]
+        ],
+        "successComment": false,
+        "failComment": false,
+        "releasedLabels": false
       }
     ],
     [
