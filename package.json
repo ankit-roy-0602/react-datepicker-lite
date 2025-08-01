@@ -32,6 +32,7 @@
     "format": "prettier --write src/**/*.{ts,tsx,css}",
     "format:check": "prettier --check src/**/*.{ts,tsx,css}",
     "type-check": "tsc --noEmit",
+    "pipeline:check": "npm run format:check && npm run lint && npm run type-check && npm run test:run && npm run build",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build",
     "size": "npm run build && bundlewatch",

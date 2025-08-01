@@ -17,7 +17,7 @@ export const DateInput = forwardRef<HTMLInputElement, DateInputProps>(
   (
     {
       value,
-      defaultValue: _defaultValue,
+      defaultValue,
       onChange,
       dateAdapter = nativeDateAdapter,
       format,
@@ -45,6 +45,9 @@ export const DateInput = forwardRef<HTMLInputElement, DateInputProps>(
     const [inputValue, setInputValue] = useState(() => {
       if (value && dateAdapter.isValid(value)) {
         return dateAdapter.format(value, format || locale.dateFormat);
+      }
+      if (defaultValue && dateAdapter.isValid(defaultValue)) {
+        return dateAdapter.format(defaultValue, format || locale.dateFormat);
       }
       return '';
     });
@@ -120,7 +123,7 @@ export const DateInput = forwardRef<HTMLInputElement, DateInputProps>(
           format || locale.dateFormat
         );
         setInputValue(formattedValue);
-      } else if (value === null) {
+      } else if (value === null || value === undefined) {
         setInputValue('');
       }
     }, [value, dateAdapter, format, locale.dateFormat]);
