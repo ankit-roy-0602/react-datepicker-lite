@@ -1,3 +1,10 @@
+# [1.1.0](https://github.com/ankit-roy-0602/react-datepicker-lite/compare/v1.0.1...v1.1.0) (2025-08-01)
+
+
+### Features
+
+* add comprehensive performance optimization documentation ([2e383c9](https://github.com/ankit-roy-0602/react-datepicker-lite/commit/2e383c9cdf7c646c49f0a51a87f7c82fb7810f79))
+
 ## [1.0.1](https://github.com/ankit-roy-0602/react-datepicker-lite/compare/v1.0.0...v1.0.1) (2025-08-01)
 
 
