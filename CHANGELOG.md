@@ -1,3 +1,11 @@
+## [1.0.1](https://github.com/ankit-roy-0602/react-datepicker-lite/compare/v1.0.0...v1.0.1) (2025-08-01)
+
+
+### Bug Fixes
+
+* resolve npm publish version conflict and add semantic-release configuration ([fe7aee9](https://github.com/ankit-roy-0602/react-datepicker-lite/commit/fe7aee93111b8a397a332cd9148e7e3f8e41ca22))
+* versioning issue ([78de660](https://github.com/ankit-roy-0602/react-datepicker-lite/commit/78de660e7b85d45e65489286cf11a9a6cf417bc4))
+
 # Changelog
 
 All notable changes to this project will be documented in this file.
