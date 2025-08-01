@@ -60,7 +60,7 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/ankit-roy-0602/react-datepicker-lite.git"
+    "url": "git+https://github.com/ankit-roy-0602/react-datepicker-lite.git"
   },
   "bugs": {
     "url": "https://github.com/ankit-roy-0602/react-datepicker-lite/issues"
