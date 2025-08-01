@@ -60,7 +60,7 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/ankit-roy-0602/react-datepicker-lite.git"
+    "url": "git+https://github.com/ankit-roy-0602/react-datepicker-lite.git"
   },
   "bugs": {
     "url": "https://github.com/ankit-roy-0602/react-datepicker-lite/issues"
@@ -81,6 +81,8 @@
   "devDependencies": {
     "@commitlint/cli": "^19.8.1",
     "@commitlint/config-conventional": "^19.8.1",
+    "@semantic-release/changelog": "^6.0.3",
+    "@semantic-release/git": "^10.0.1",
     "@storybook/addon-a11y": "^8.6.14",
     "@storybook/addon-essentials": "^8.6.14",
     "@storybook/addon-interactions": "^8.6.14",
