@@ -26,8 +26,18 @@ describe('defaultLocale', () => {
 
     it('has correct month names', () => {
       const expectedMonths = [
-        'January', 'February', 'March', 'April', 'May', 'June',
-        'July', 'August', 'September', 'October', 'November', 'December'
+        'January',
+        'February',
+        'March',
+        'April',
+        'May',
+        'June',
+        'July',
+        'August',
+        'September',
+        'October',
+        'November',
+        'December',
       ];
       expect(defaultLocale.months).toEqual(expectedMonths);
     });
@@ -38,8 +48,18 @@ describe('defaultLocale', () => {
 
     it('has correct short month names', () => {
       const expectedShortMonths = [
-        'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun',
-        'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'
+        'Jan',
+        'Feb',
+        'Mar',
+        'Apr',
+        'May',
+        'Jun',
+        'Jul',
+        'Aug',
+        'Sep',
+        'Oct',
+        'Nov',
+        'Dec',
       ];
       expect(defaultLocale.monthsShort).toEqual(expectedShortMonths);
     });
@@ -52,7 +72,13 @@ describe('defaultLocale', () => {
 
     it('has correct weekday names', () => {
       const expectedWeekdays = [
-        'Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'
+        'Sunday',
+        'Monday',
+        'Tuesday',
+        'Wednesday',
+        'Thursday',
+        'Friday',
+        'Saturday',
       ];
       expect(defaultLocale.weekdays).toEqual(expectedWeekdays);
     });
@@ -63,7 +89,13 @@ describe('defaultLocale', () => {
 
     it('has correct short weekday names', () => {
       const expectedShortWeekdays = [
-        'Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'
+        'Sun',
+        'Mon',
+        'Tue',
+        'Wed',
+        'Thu',
+        'Fri',
+        'Sat',
       ];
       expect(defaultLocale.weekdaysShort).toEqual(expectedShortWeekdays);
     });
@@ -73,9 +105,7 @@ describe('defaultLocale', () => {
     });
 
     it('has correct minimal weekday names', () => {
-      const expectedMinWeekdays = [
-        'Su', 'Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa'
-      ];
+      const expectedMinWeekdays = ['Su', 'Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa'];
       expect(defaultLocale.weekdaysMin).toEqual(expectedMinWeekdays);
     });
   });
@@ -97,12 +127,20 @@ describe('defaultLocale', () => {
   describe('Locale Structure Validation', () => {
     it('has all required properties', () => {
       const requiredProperties = [
-        'code', 'name', 'months', 'monthsShort', 'weekdays', 
-        'weekdaysShort', 'weekdaysMin', 'firstDayOfWeek', 
-        'dateFormat', 'timeFormat', 'dateTimeFormat'
+        'code',
+        'name',
+        'months',
+        'monthsShort',
+        'weekdays',
+        'weekdaysShort',
+        'weekdaysMin',
+        'firstDayOfWeek',
+        'dateFormat',
+        'timeFormat',
+        'dateTimeFormat',
       ];
 
-      requiredProperties.forEach(prop => {
+      requiredProperties.forEach((prop) => {
         expect(defaultLocale).toHaveProperty(prop);
       });
     });
@@ -129,27 +167,27 @@ describe('defaultLocale', () => {
     });
 
     it('has non-empty array elements', () => {
-      defaultLocale.months.forEach(month => {
+      defaultLocale.months.forEach((month) => {
         expect(month).toBeTruthy();
         expect(typeof month).toBe('string');
       });
 
-      defaultLocale.monthsShort.forEach(month => {
+      defaultLocale.monthsShort.forEach((month) => {
         expect(month).toBeTruthy();
         expect(typeof month).toBe('string');
       });
 
-      defaultLocale.weekdays.forEach(weekday => {
+      defaultLocale.weekdays.forEach((weekday) => {
         expect(weekday).toBeTruthy();
         expect(typeof weekday).toBe('string');
       });
 
-      defaultLocale.weekdaysShort.forEach(weekday => {
+      defaultLocale.weekdaysShort.forEach((weekday) => {
         expect(weekday).toBeTruthy();
         expect(typeof weekday).toBe('string');
       });
 
-      defaultLocale.weekdaysMin.forEach(weekday => {
+      defaultLocale.weekdaysMin.forEach((weekday) => {
         expect(weekday).toBeTruthy();
         expect(typeof weekday).toBe('string');
       });
@@ -160,7 +198,7 @@ describe('defaultLocale', () => {
     it('should preserve original months array structure', () => {
       const originalLength = defaultLocale.months.length;
       const originalFirstMonth = defaultLocale.months[0];
-      
+
       // Test that the array maintains its structure
       expect(defaultLocale.months).toHaveLength(originalLength);
       expect(defaultLocale.months[0]).toBe(originalFirstMonth);
@@ -169,7 +207,7 @@ describe('defaultLocale', () => {
     it('should preserve original weekdays array structure', () => {
       const originalLength = defaultLocale.weekdays.length;
       const originalFirstDay = defaultLocale.weekdays[0];
-      
+
       // Test that the array maintains its structure
       expect(defaultLocale.weekdays).toHaveLength(originalLength);
       expect(defaultLocale.weekdays[0]).toBe(originalFirstDay);
@@ -183,24 +221,46 @@ describe('defaultLocale', () => {
         code: 'es',
         name: 'Spanish',
         months: [
-          'Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio',
-          'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'
+          'Enero',
+          'Febrero',
+          'Marzo',
+          'Abril',
+          'Mayo',
+          'Junio',
+          'Julio',
+          'Agosto',
+          'Septiembre',
+          'Octubre',
+          'Noviembre',
+          'Diciembre',
         ],
         monthsShort: [
-          'Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun',
-          'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic'
+          'Ene',
+          'Feb',
+          'Mar',
+          'Abr',
+          'May',
+          'Jun',
+          'Jul',
+          'Ago',
+          'Sep',
+          'Oct',
+          'Nov',
+          'Dic',
         ],
         weekdays: [
-          'Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'
+          'Domingo',
+          'Lunes',
+          'Martes',
+          'Miércoles',
+          'Jueves',
+          'Viernes',
+          'Sábado',
         ],
-        weekdaysShort: [
-          'Dom', 'Lun', 'Mar', 'Mié', 'Jue', 'Vie', 'Sáb'
-        ],
-        weekdaysMin: [
-          'Do', 'Lu', 'Ma', 'Mi', 'Ju', 'Vi', 'Sá'
-        ],
+        weekdaysShort: ['Dom', 'Lun', 'Mar', 'Mié', 'Jue', 'Vie', 'Sáb'],
+        weekdaysMin: ['Do', 'Lu', 'Ma', 'Mi', 'Ju', 'Vi', 'Sá'],
         firstDayOfWeek: 1, // Monday
-        dateFormat: 'dd/MM/yyyy'
+        dateFormat: 'dd/MM/yyyy',
       };
 
       expect(customLocale.code).toBe('es');
@@ -218,7 +278,7 @@ describe('defaultLocale', () => {
         name: 'Arabic',
         rtl: true,
         firstDayOfWeek: 6, // Saturday
-        dateFormat: 'dd/MM/yyyy'
+        dateFormat: 'dd/MM/yyyy',
       };
 
       expect(rtlLocale.rtl).toBe(true);
@@ -231,7 +291,7 @@ describe('defaultLocale', () => {
         code: 'us',
         name: 'US English',
         timeFormat: 'hh:mm a',
-        dateTimeFormat: 'MM/dd/yyyy hh:mm a'
+        dateTimeFormat: 'MM/dd/yyyy hh:mm a',
       };
 
       expect(customTimeLocale.timeFormat).toBe('hh:mm a');
@@ -244,7 +304,7 @@ describe('defaultLocale', () => {
       // JavaScript Date months are 0-indexed
       const testDate = new Date(2024, 0, 15); // January 15, 2024
       const monthIndex = testDate.getMonth();
-      
+
       expect(defaultLocale.months[monthIndex]).toBe('January');
       expect(defaultLocale.monthsShort[monthIndex]).toBe('Jan');
     });
@@ -253,7 +313,7 @@ describe('defaultLocale', () => {
       // JavaScript Date days are 0-indexed (0 = Sunday)
       const testDate = new Date(2024, 0, 14); // Sunday, January 14, 2024
       const dayIndex = testDate.getDay();
-      
+
       expect(defaultLocale.weekdays[dayIndex]).toBe('Sunday');
       expect(defaultLocale.weekdaysShort[dayIndex]).toBe('Sun');
       expect(defaultLocale.weekdaysMin[dayIndex]).toBe('Su');
@@ -281,7 +341,7 @@ describe('defaultLocale', () => {
   describe('Edge Cases', () => {
     it('handles locale object spreading', () => {
       const spread = { ...defaultLocale };
-      
+
       expect(spread).toEqual(defaultLocale);
       expect(spread).not.toBe(defaultLocale); // Different object reference
     });
@@ -294,11 +354,11 @@ describe('defaultLocale', () => {
 
     it('handles array iteration', () => {
       expect(() => {
-        defaultLocale.months.forEach(month => month.length);
+        defaultLocale.months.forEach((month) => month.length);
       }).not.toThrow();
 
       expect(() => {
-        defaultLocale.weekdays.forEach(day => day.length);
+        defaultLocale.weekdays.forEach((day) => day.length);
       }).not.toThrow();
     });
   });
@@ -319,11 +379,11 @@ describe('defaultLocale', () => {
     });
 
     it('has string arrays with string elements', () => {
-      defaultLocale.months.forEach(month => {
+      defaultLocale.months.forEach((month) => {
         expect(typeof month).toBe('string');
       });
 
-      defaultLocale.weekdays.forEach(day => {
+      defaultLocale.weekdays.forEach((day) => {
         expect(typeof day).toBe('string');
       });
     });

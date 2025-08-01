@@ -42,10 +42,16 @@ export const Calendar: React.FC<CalendarProps> = ({
         dateAdapter.getDay(current) === 0 || dateAdapter.getDay(current) === 6;
 
       let isDisabled = false;
-      if (minDate && dateAdapter.isBefore(current, dateAdapter.startOfDay(minDate))) {
+      if (
+        minDate &&
+        dateAdapter.isBefore(current, dateAdapter.startOfDay(minDate))
+      ) {
         isDisabled = true;
       }
-      if (maxDate && dateAdapter.isAfter(current, dateAdapter.startOfDay(maxDate))) {
+      if (
+        maxDate &&
+        dateAdapter.isAfter(current, dateAdapter.startOfDay(maxDate))
+      ) {
         isDisabled = true;
       }
       if (disabledDates && !isDisabled) {
@@ -165,7 +171,7 @@ export const Calendar: React.FC<CalendarProps> = ({
     (event: React.KeyboardEvent, day: CalendarDay) => {
       if (day.isDisabled) return;
 
-      const currentIndex = calendarDays.findIndex(d => 
+      const currentIndex = calendarDays.findIndex((d) =>
         dateAdapter.isSameDay(d.date, day.date)
       );
 
@@ -215,7 +221,11 @@ export const Calendar: React.FC<CalendarProps> = ({
           return;
       }
 
-      if (newIndex !== currentIndex && newIndex >= 0 && newIndex < calendarDays.length) {
+      if (
+        newIndex !== currentIndex &&
+        newIndex >= 0 &&
+        newIndex < calendarDays.length
+      ) {
         const newDay = calendarDays[newIndex];
         if (newDay && !newDay.isDisabled) {
           // Focus the new button
@@ -288,19 +298,26 @@ export const Calendar: React.FC<CalendarProps> = ({
         </button>
       </div>
 
-      <div 
+      <div
         className='rdl-calendar-grid'
         role='grid'
         aria-label={`Calendar for ${locale.months[dateAdapter.getMonth(currentDate)]} ${dateAdapter.getYear(currentDate)}`}
       >
         <div className='rdl-calendar-weekdays' role='row'>
           {showWeekNumbers && (
-            <div className='rdl-calendar-weekday rdl-calendar-week-number-header' role='columnheader'>
+            <div
+              className='rdl-calendar-weekday rdl-calendar-week-number-header'
+              role='columnheader'
+            >
               Wk
             </div>
           )}
           {weekdays.map((weekday, index) => (
-            <div key={index} className='rdl-calendar-weekday' role='columnheader'>
+            <div
+              key={index}
+              className='rdl-calendar-weekday'
+              role='columnheader'
+            >
               {weekday}
             </div>
           ))}

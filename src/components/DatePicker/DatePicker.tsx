@@ -46,7 +46,9 @@ export const DatePicker: React.FC<DatePickerProps> = ({
   const inputRef = useRef<HTMLInputElement>(null);
 
   // Handle controlled/uncontrolled state
-  const [internalValue, setInternalValue] = useState(() => defaultValue || null);
+  const [internalValue, setInternalValue] = useState(
+    () => defaultValue || null
+  );
   const currentValue = value !== undefined ? value : internalValue;
   const isControlled = value !== undefined;
 
@@ -139,7 +141,7 @@ export const DatePicker: React.FC<DatePickerProps> = ({
     .join(' ');
 
   // Create props objects with proper type handling
-  const dateInputProps: any = {
+  const dateInputProps: Record<string, unknown> = {
     ref: inputRef,
     onChange: handleDateChange,
     dateAdapter,

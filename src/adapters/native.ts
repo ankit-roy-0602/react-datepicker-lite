@@ -8,53 +8,94 @@ export class NativeDateAdapter implements DateAdapter<Date> {
 
     try {
       const monthNames = [
-        'January', 'February', 'March', 'April', 'May', 'June',
-        'July', 'August', 'September', 'October', 'November', 'December'
-      ];
-      
-      const monthNamesShort = [
-        'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun',
-        'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'
-      ];
-      
-      const dayNames = [
-        'Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'
-      ];
-      
-      const dayNamesShort = [
-        'Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'
+        'January',
+        'February',
+        'March',
+        'April',
+        'May',
+        'June',
+        'July',
+        'August',
+        'September',
+        'October',
+        'November',
+        'December',
       ];
 
+      const monthNamesShort = [
+        'Jan',
+        'Feb',
+        'Mar',
+        'Apr',
+        'May',
+        'Jun',
+        'Jul',
+        'Aug',
+        'Sep',
+        'Oct',
+        'Nov',
+        'Dec',
+      ];
+
+      const dayNames = [
+        'Sunday',
+        'Monday',
+        'Tuesday',
+        'Wednesday',
+        'Thursday',
+        'Friday',
+        'Saturday',
+      ];
+
+      const dayNamesShort = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+
       let result = format;
-      
+
       // Simple approach: replace longest patterns first to avoid conflicts
       const formatMap: Record<string, string> = {
-        'EEEE': dayNames[date.getDay()] || '',
-        'EEE': dayNamesShort[date.getDay()] || '',
-        'MMMM': monthNames[date.getMonth()] || '',
-        'MMM': monthNamesShort[date.getMonth()] || '',
-        'yyyy': date.getFullYear().toString(),
-        'YYYY': date.getFullYear().toString(),
-        'MM': (date.getMonth() + 1).toString().padStart(2, '0'),
-        'dd': date.getDate().toString().padStart(2, '0'),
-        'DD': date.getDate().toString().padStart(2, '0'),
-        'HH': date.getHours().toString().padStart(2, '0'),
-        'mm': date.getMinutes().toString().padStart(2, '0'),
-        'ss': date.getSeconds().toString().padStart(2, '0'),
-        'YY': date.getFullYear().toString().slice(-2),
-        'M': (date.getMonth() + 1).toString(),
-        'D': date.getDate().toString(),
-        'H': date.getHours().toString(),
-        'm': date.getMinutes().toString(),
-        's': date.getSeconds().toString(),
+        EEEE: dayNames[date.getDay()] || '',
+        EEE: dayNamesShort[date.getDay()] || '',
+        MMMM: monthNames[date.getMonth()] || '',
+        MMM: monthNamesShort[date.getMonth()] || '',
+        yyyy: date.getFullYear().toString(),
+        YYYY: date.getFullYear().toString(),
+        MM: (date.getMonth() + 1).toString().padStart(2, '0'),
+        dd: date.getDate().toString().padStart(2, '0'),
+        DD: date.getDate().toString().padStart(2, '0'),
+        HH: date.getHours().toString().padStart(2, '0'),
+        mm: date.getMinutes().toString().padStart(2, '0'),
+        ss: date.getSeconds().toString().padStart(2, '0'),
+        YY: date.getFullYear().toString().slice(-2),
+        M: (date.getMonth() + 1).toString(),
+        D: date.getDate().toString(),
+        H: date.getHours().toString(),
+        m: date.getMinutes().toString(),
+        s: date.getSeconds().toString(),
       };
 
       // Replace patterns in specific order to avoid conflicts
       // Use word boundaries and specific ordering
       const patterns = [
-        'EEEE', 'EEE', 'MMMM', 'MMM', 'yyyy', 'YYYY', 'MM', 'dd', 'DD', 'HH', 'mm', 'ss', 'YY', 'M', 'D', 'H', 'm', 's'
+        'EEEE',
+        'EEE',
+        'MMMM',
+        'MMM',
+        'yyyy',
+        'YYYY',
+        'MM',
+        'dd',
+        'DD',
+        'HH',
+        'mm',
+        'ss',
+        'YY',
+        'M',
+        'D',
+        'H',
+        'm',
+        's',
       ];
-      
+
       for (const pattern of patterns) {
         const value = formatMap[pattern];
         if (value !== undefined) {
@@ -68,7 +109,7 @@ export class NativeDateAdapter implements DateAdapter<Date> {
       }
 
       return result;
-    } catch (error) {
+    } catch {
       return '';
     }
   }
@@ -86,18 +127,20 @@ export class NativeDateAdapter implements DateAdapter<Date> {
           const month = parseInt(match[1]);
           const day = parseInt(match[2]);
           const year = parseInt(match[3]);
-          
+
           // Basic range validation
           if (month < 1 || month > 12 || day < 1 || day > 31 || year < 1) {
             return null;
           }
-          
+
           const date = new Date(year, month - 1, day);
           // Validate the date components match what was parsed
           // This catches cases like Feb 31 -> Mar 3
-          if (date.getFullYear() === year && 
-              date.getMonth() === month - 1 && 
-              date.getDate() === day) {
+          if (
+            date.getFullYear() === year &&
+            date.getMonth() === month - 1 &&
+            date.getDate() === day
+          ) {
             return date;
           }
           return null;
@@ -110,9 +153,11 @@ export class NativeDateAdapter implements DateAdapter<Date> {
           const year = parseInt(match[3]);
           const date = new Date(year, month - 1, day);
           // Validate the date components match what was parsed
-          if (date.getFullYear() === year && 
-              date.getMonth() === month - 1 && 
-              date.getDate() === day) {
+          if (
+            date.getFullYear() === year &&
+            date.getMonth() === month - 1 &&
+            date.getDate() === day
+          ) {
             return date;
           }
         }
@@ -124,16 +169,32 @@ export class NativeDateAdapter implements DateAdapter<Date> {
           const day = parseInt(match[3]);
           const date = new Date(year, month - 1, day);
           // Validate the date components match what was parsed
-          if (date.getFullYear() === year && 
-              date.getMonth() === month - 1 && 
-              date.getDate() === day) {
+          if (
+            date.getFullYear() === year &&
+            date.getMonth() === month - 1 &&
+            date.getDate() === day
+          ) {
             return date;
           }
         }
       } else if (format === 'MMM dd, yyyy') {
-        const monthNames = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun',
-                           'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
-        const match = dateString.match(/^([A-Za-z]{3})\s+(\d{1,2}),\s+(\d{4})$/);
+        const monthNames = [
+          'Jan',
+          'Feb',
+          'Mar',
+          'Apr',
+          'May',
+          'Jun',
+          'Jul',
+          'Aug',
+          'Sep',
+          'Oct',
+          'Nov',
+          'Dec',
+        ];
+        const match = dateString.match(
+          /^([A-Za-z]{3})\s+(\d{1,2}),\s+(\d{4})$/
+        );
         if (match && match[1] && match[2] && match[3]) {
           const monthStr = match[1];
           const day = parseInt(match[2]);
@@ -142,9 +203,11 @@ export class NativeDateAdapter implements DateAdapter<Date> {
           if (monthIndex !== -1) {
             const date = new Date(year, monthIndex, day);
             // Validate the date components match what was parsed
-            if (date.getFullYear() === year && 
-                date.getMonth() === monthIndex && 
-                date.getDate() === day) {
+            if (
+              date.getFullYear() === year &&
+              date.getMonth() === monthIndex &&
+              date.getDate() === day
+            ) {
               return date;
             }
           }
@@ -154,7 +217,7 @@ export class NativeDateAdapter implements DateAdapter<Date> {
       // Fallback to native Date parsing
       const parsed = new Date(dateString);
       return this.isValid(parsed) ? parsed : null;
-    } catch (error) {
+    } catch {
       return null;
     }
   }
@@ -171,29 +234,28 @@ export class NativeDateAdapter implements DateAdapter<Date> {
 
   addMonths(date: Date, months: number): Date {
     const result = new Date(date);
-    const originalDay = result.getDate();
+    const _originalDay = result.getDate();
     result.setMonth(result.getMonth() + months);
-    
+
     // Handle month overflow (e.g., Jan 31 + 1 month should be Feb 28/29, not Mar 3)
-    if (result.getDate() !== originalDay) {
+    if (result.getDate() !== _originalDay) {
       result.setDate(0); // Set to last day of previous month
     }
-    
+
     return result;
   }
 
   addYears(date: Date, years: number): Date {
     const result = new Date(date);
     const originalMonth = result.getMonth();
-    const originalDay = result.getDate();
-    
+
     result.setFullYear(result.getFullYear() + years);
-    
+
     // Handle leap year edge case (Feb 29 -> Feb 28 in non-leap year)
     if (result.getMonth() !== originalMonth) {
       result.setDate(0); // Set to last day of previous month
     }
-    
+
     return result;
   }
 

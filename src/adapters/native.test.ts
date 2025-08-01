@@ -16,11 +16,21 @@ describe('nativeDateAdapter', () => {
     });
 
     it('formats date with different patterns', () => {
-      expect(nativeDateAdapter.format(testDate, 'dd/MM/yyyy')).toBe('15/01/2024');
-      expect(nativeDateAdapter.format(testDate, 'MMM dd, yyyy')).toBe('Jan 15, 2024');
-      expect(nativeDateAdapter.format(testDate, 'MMMM dd, yyyy')).toBe('January 15, 2024');
-      expect(nativeDateAdapter.format(testDate, 'EEE, MMM dd')).toBe('Mon, Jan 15');
-      expect(nativeDateAdapter.format(testDate, 'EEEE, MMMM dd, yyyy')).toBe('Monday, January 15, 2024');
+      expect(nativeDateAdapter.format(testDate, 'dd/MM/yyyy')).toBe(
+        '15/01/2024'
+      );
+      expect(nativeDateAdapter.format(testDate, 'MMM dd, yyyy')).toBe(
+        'Jan 15, 2024'
+      );
+      expect(nativeDateAdapter.format(testDate, 'MMMM dd, yyyy')).toBe(
+        'January 15, 2024'
+      );
+      expect(nativeDateAdapter.format(testDate, 'EEE, MMM dd')).toBe(
+        'Mon, Jan 15'
+      );
+      expect(nativeDateAdapter.format(testDate, 'EEEE, MMMM dd, yyyy')).toBe(
+        'Monday, January 15, 2024'
+      );
     });
 
     it('handles invalid date gracefully', () => {
@@ -46,9 +56,15 @@ describe('nativeDateAdapter', () => {
     });
 
     it('parses different date formats', () => {
-      expect(nativeDateAdapter.parse('2024-01-15', 'yyyy-MM-dd')).toEqual(new Date(2024, 0, 15));
-      expect(nativeDateAdapter.parse('15/01/2024', 'dd/MM/yyyy')).toEqual(new Date(2024, 0, 15));
-      expect(nativeDateAdapter.parse('Jan 15, 2024', 'MMM dd, yyyy')).toEqual(new Date(2024, 0, 15));
+      expect(nativeDateAdapter.parse('2024-01-15', 'yyyy-MM-dd')).toEqual(
+        new Date(2024, 0, 15)
+      );
+      expect(nativeDateAdapter.parse('15/01/2024', 'dd/MM/yyyy')).toEqual(
+        new Date(2024, 0, 15)
+      );
+      expect(nativeDateAdapter.parse('Jan 15, 2024', 'MMM dd, yyyy')).toEqual(
+        new Date(2024, 0, 15)
+      );
     });
 
     it('returns null for invalid date string', () => {
@@ -488,7 +504,7 @@ describe('nativeDateAdapter', () => {
     it('returns current date', () => {
       const today = nativeDateAdapter.today();
       const now = new Date();
-      
+
       expect(today.getFullYear()).toBe(now.getFullYear());
       expect(today.getMonth()).toBe(now.getMonth());
       expect(today.getDate()).toBe(now.getDate());
@@ -534,29 +550,33 @@ describe('nativeDateAdapter', () => {
     it('handles extreme dates', () => {
       const extremeDate = new Date('1900-01-01T00:00:00.000Z');
       expect(nativeDateAdapter.isValid(extremeDate)).toBe(true);
-      expect(nativeDateAdapter.format(extremeDate, 'yyyy-MM-dd')).toBe('1900-01-01');
+      expect(nativeDateAdapter.format(extremeDate, 'yyyy-MM-dd')).toBe(
+        '1900-01-01'
+      );
     });
 
     it('handles future dates', () => {
       const futureDate = new Date(2100, 11, 31, 23, 59, 59, 999); // December 31, 2100 in local time
       expect(nativeDateAdapter.isValid(futureDate)).toBe(true);
-      expect(nativeDateAdapter.format(futureDate, 'yyyy-MM-dd')).toBe('2100-12-31');
+      expect(nativeDateAdapter.format(futureDate, 'yyyy-MM-dd')).toBe(
+        '2100-12-31'
+      );
     });
   });
 
   describe('Performance', () => {
     it('handles large number of operations efficiently', () => {
       const startTime = performance.now();
-      
+
       for (let i = 0; i < 1000; i++) {
         const date = nativeDateAdapter.addDays(testDate, i);
         nativeDateAdapter.format(date, 'MM/dd/yyyy');
         nativeDateAdapter.isValid(date);
       }
-      
+
       const endTime = performance.now();
       const executionTime = endTime - startTime;
-      
+
       // Should complete within reasonable time
       expect(executionTime).toBeLessThan(1000);
     });
@@ -567,13 +587,17 @@ describe('nativeDateAdapter', () => {
       // Create a date, manipulate it, and verify results
       const startDate = nativeDateAdapter.parse('01/01/2024', 'MM/dd/yyyy');
       expect(startDate).not.toBeNull();
-      
+
       const futureDate = nativeDateAdapter.addMonths(startDate!, 6);
-      expect(nativeDateAdapter.format(futureDate, 'MM/dd/yyyy')).toBe('07/01/2024');
-      
+      expect(nativeDateAdapter.format(futureDate, 'MM/dd/yyyy')).toBe(
+        '07/01/2024'
+      );
+
       const endOfMonth = nativeDateAdapter.endOfMonth(futureDate);
-      expect(nativeDateAdapter.format(endOfMonth, 'MM/dd/yyyy')).toBe('07/31/2024');
-      
+      expect(nativeDateAdapter.format(endOfMonth, 'MM/dd/yyyy')).toBe(
+        '07/31/2024'
+      );
+
       expect(nativeDateAdapter.isSameMonth(futureDate, endOfMonth)).toBe(true);
       expect(nativeDateAdapter.isAfter(endOfMonth, futureDate)).toBe(true);
     });
@@ -581,7 +605,7 @@ describe('nativeDateAdapter', () => {
     it('maintains consistency across operations', () => {
       const date1 = nativeDateAdapter.startOfDay(testDate);
       const date2 = nativeDateAdapter.endOfDay(testDate);
-      
+
       expect(nativeDateAdapter.isSameDay(date1, date2)).toBe(true);
       expect(nativeDateAdapter.isBefore(date1, date2)).toBe(true);
       expect(nativeDateAdapter.isAfter(date2, date1)).toBe(true);
