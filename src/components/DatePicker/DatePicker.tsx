@@ -46,8 +46,9 @@ export const DatePicker: React.FC<DatePickerProps> = ({
   const inputRef = useRef<HTMLInputElement>(null);
 
   // Handle controlled/uncontrolled state
-  const [internalValue, setInternalValue] = useState(defaultValue || null);
+  const [internalValue, setInternalValue] = useState(() => defaultValue || null);
   const currentValue = value !== undefined ? value : internalValue;
+  const isControlled = value !== undefined;
 
   const handleDateChange = useCallback(
     (newDate: Date | null) => {
@@ -74,7 +75,10 @@ export const DatePicker: React.FC<DatePickerProps> = ({
 
       if (closeOnSelect) {
         setIsOpen(false);
-        inputRef.current?.focus();
+        // Focus the input after state update
+        requestAnimationFrame(() => {
+          inputRef.current?.focus();
+        });
       }
     },
     [handleDateChange, closeOnSelect]
@@ -135,9 +139,8 @@ export const DatePicker: React.FC<DatePickerProps> = ({
     .join(' ');
 
   // Create props objects with proper type handling
-  const dateInputProps = {
+  const dateInputProps: any = {
     ref: inputRef,
-    value: currentValue,
     onChange: handleDateChange,
     dateAdapter,
     disabled,
@@ -158,6 +161,14 @@ export const DatePicker: React.FC<DatePickerProps> = ({
     ...(ariaDescribedBy && { 'aria-describedby': ariaDescribedBy }),
     ...(id && { id }),
   };
+
+  // Add value or defaultValue based on controlled/uncontrolled state
+  if (isControlled) {
+    dateInputProps.value = value;
+  } else {
+    // For uncontrolled mode, pass the current internal value as value
+    dateInputProps.value = internalValue;
+  }
 
   const calendarProps = {
     currentDate,

@@ -42,13 +42,13 @@ export const Calendar: React.FC<CalendarProps> = ({
         dateAdapter.getDay(current) === 0 || dateAdapter.getDay(current) === 6;
 
       let isDisabled = false;
-      if (minDate && dateAdapter.isBefore(current, minDate)) {
+      if (minDate && dateAdapter.isBefore(current, dateAdapter.startOfDay(minDate))) {
         isDisabled = true;
       }
-      if (maxDate && dateAdapter.isAfter(current, maxDate)) {
+      if (maxDate && dateAdapter.isAfter(current, dateAdapter.startOfDay(maxDate))) {
         isDisabled = true;
       }
-      if (disabledDates) {
+      if (disabledDates && !isDisabled) {
         if (Array.isArray(disabledDates)) {
           isDisabled = disabledDates.some((disabledDate) =>
             dateAdapter.isSameDay(current, disabledDate)
@@ -142,6 +142,94 @@ export const Calendar: React.FC<CalendarProps> = ({
     [isRangeSelection, onRangeHover]
   );
 
+  const handleDateMouseLeave = useCallback(() => {
+    if (isRangeSelection && onRangeHover) {
+      onRangeHover(null);
+    }
+  }, [isRangeSelection, onRangeHover]);
+
+  const handleHeaderClick = useCallback(
+    (event: React.MouseEvent) => {
+      if (event.shiftKey) {
+        // Previous year
+        onCurrentDateChange(dateAdapter.addYears(currentDate, -1));
+      } else {
+        // Next year
+        onCurrentDateChange(dateAdapter.addYears(currentDate, 1));
+      }
+    },
+    [currentDate, dateAdapter, onCurrentDateChange]
+  );
+
+  const handleKeyDown = useCallback(
+    (event: React.KeyboardEvent, day: CalendarDay) => {
+      if (day.isDisabled) return;
+
+      const currentIndex = calendarDays.findIndex(d => 
+        dateAdapter.isSameDay(d.date, day.date)
+      );
+
+      let newIndex = currentIndex;
+
+      switch (event.key) {
+        case 'Enter':
+        case ' ':
+          event.preventDefault();
+          onDateSelect(day.date);
+          break;
+        case 'ArrowRight':
+          event.preventDefault();
+          newIndex = Math.min(currentIndex + 1, calendarDays.length - 1);
+          break;
+        case 'ArrowLeft':
+          event.preventDefault();
+          newIndex = Math.max(currentIndex - 1, 0);
+          break;
+        case 'ArrowDown':
+          event.preventDefault();
+          newIndex = Math.min(currentIndex + 7, calendarDays.length - 1);
+          break;
+        case 'ArrowUp':
+          event.preventDefault();
+          newIndex = Math.max(currentIndex - 7, 0);
+          break;
+        case 'Home':
+          event.preventDefault();
+          // Go to first day of week
+          newIndex = currentIndex - (currentIndex % 7);
+          break;
+        case 'End':
+          event.preventDefault();
+          // Go to last day of week
+          newIndex = currentIndex + (6 - (currentIndex % 7));
+          break;
+        case 'PageUp':
+          event.preventDefault();
+          onCurrentDateChange(dateAdapter.addMonths(currentDate, -1));
+          break;
+        case 'PageDown':
+          event.preventDefault();
+          onCurrentDateChange(dateAdapter.addMonths(currentDate, 1));
+          break;
+        default:
+          return;
+      }
+
+      if (newIndex !== currentIndex && newIndex >= 0 && newIndex < calendarDays.length) {
+        const newDay = calendarDays[newIndex];
+        if (newDay && !newDay.isDisabled) {
+          // Focus the new button
+          const buttons = document.querySelectorAll('.rdl-calendar-day');
+          const targetButton = buttons[newIndex] as HTMLButtonElement;
+          if (targetButton) {
+            targetButton.focus();
+          }
+        }
+      }
+    },
+    [calendarDays, dateAdapter, onDateSelect, onCurrentDateChange, currentDate]
+  );
+
   const weekdays = useMemo(() => {
     const days = [];
     for (let i = 0; i < 7; i++) {
@@ -174,14 +262,19 @@ export const Calendar: React.FC<CalendarProps> = ({
           </svg>
         </button>
 
-        <div className='rdl-calendar-title'>
+        <button
+          type='button'
+          className='rdl-calendar-title'
+          onClick={handleHeaderClick}
+          aria-label={`${locale.months[dateAdapter.getMonth(currentDate)]} ${dateAdapter.getYear(currentDate)}, click to navigate years`}
+        >
           <span className='rdl-calendar-month'>
             {locale.months[dateAdapter.getMonth(currentDate)]}
           </span>
           <span className='rdl-calendar-year'>
             {dateAdapter.getYear(currentDate)}
           </span>
-        </div>
+        </button>
 
         <button
           type='button'
@@ -195,15 +288,19 @@ export const Calendar: React.FC<CalendarProps> = ({
         </button>
       </div>
 
-      <div className='rdl-calendar-grid'>
-        <div className='rdl-calendar-weekdays'>
+      <div 
+        className='rdl-calendar-grid'
+        role='grid'
+        aria-label={`Calendar for ${locale.months[dateAdapter.getMonth(currentDate)]} ${dateAdapter.getYear(currentDate)}`}
+      >
+        <div className='rdl-calendar-weekdays' role='row'>
           {showWeekNumbers && (
-            <div className='rdl-calendar-weekday rdl-calendar-week-number-header'>
+            <div className='rdl-calendar-weekday rdl-calendar-week-number-header' role='columnheader'>
               Wk
             </div>
           )}
           {weekdays.map((weekday, index) => (
-            <div key={index} className='rdl-calendar-weekday'>
+            <div key={index} className='rdl-calendar-weekday' role='columnheader'>
               {weekday}
             </div>
           ))}
@@ -211,9 +308,9 @@ export const Calendar: React.FC<CalendarProps> = ({
 
         <div className='rdl-calendar-days'>
           {Array.from({ length: 6 }, (_, weekIndex) => (
-            <div key={weekIndex} className='rdl-calendar-week'>
+            <div key={weekIndex} className='rdl-calendar-week' role='row'>
               {showWeekNumbers && (
-                <div className='rdl-calendar-week-number'>
+                <div className='rdl-calendar-week-number' role='rowheader'>
                   {/* Week number calculation would go here */}
                   {weekIndex + 1}
                 </div>
@@ -236,21 +333,26 @@ export const Calendar: React.FC<CalendarProps> = ({
                     .join(' ');
 
                   return (
-                    <button
-                      key={dayIndex}
-                      type='button'
-                      className={dayClassName}
-                      onClick={() => handleDateClick(day)}
-                      onMouseEnter={() => handleDateHover(day)}
-                      disabled={day.isDisabled}
-                      aria-label={dateAdapter.format(
-                        day.date,
-                        locale.dateFormat
-                      )}
-                      aria-pressed={day.isSelected}
-                    >
-                      {dateAdapter.format(day.date, 'D')}
-                    </button>
+                    <div key={dayIndex} role='gridcell'>
+                      <button
+                        type='button'
+                        className={dayClassName}
+                        onClick={() => handleDateClick(day)}
+                        onMouseEnter={() => handleDateHover(day)}
+                        onMouseLeave={handleDateMouseLeave}
+                        onKeyDown={(e) => handleKeyDown(e, day)}
+                        disabled={day.isDisabled}
+                        aria-label={dateAdapter.format(
+                          day.date,
+                          locale.dateFormat
+                        )}
+                        aria-pressed={day.isSelected}
+                        aria-disabled={day.isDisabled}
+                        tabIndex={day.isSelected ? 0 : -1}
+                      >
+                        {dateAdapter.format(day.date, 'D')}
+                      </button>
+                    </div>
                   );
                 })}
             </div>
