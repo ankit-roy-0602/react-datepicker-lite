@@ -242,6 +242,72 @@ React DatePicker Lite is designed to be lightweight:
 - **Minified + Gzipped**: ~8KB
 - **Zero runtime dependencies**
 
+## ⚡ Performance Optimization
+
+### Tree Shaking
+
+React DatePicker Lite supports tree shaking out of the box. Import only what you need:
+
+```tsx
+// ✅ Tree-shakable imports
+import { DatePicker } from 'react-datepicker-lite';
+import { Calendar } from 'react-datepicker-lite';
+import { DateInput } from 'react-datepicker-lite';
+
+// ❌ Avoid importing everything
+import * as RDL from 'react-datepicker-lite';
+```
+
+### Code Splitting
+
+For large applications, consider code splitting the DatePicker:
+
+```tsx
+// Lazy load the DatePicker
+import { lazy, Suspense } from 'react';
+
+const DatePicker = lazy(() => 
+  import('react-datepicker-lite').then(module => ({ 
+    default: module.DatePicker 
+  }))
+);
+
+function App() {
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <DatePicker value={date} onChange={setDate} />
+    </Suspense>
+  );
+}
+```
+
+### CSS Optimization
+
+Load CSS efficiently:
+
+```tsx
+// ✅ Import CSS once in your main file
+import 'react-datepicker-lite/dist/index.css';
+
+// Or use CSS-in-JS for better tree shaking
+import { DatePicker } from 'react-datepicker-lite';
+// CSS will be automatically included with the component
+```
+
+### Memory Management
+
+For applications with many DatePicker instances:
+
+```tsx
+// ✅ Memoize callback functions
+const handleDateChange = useCallback((date: Date | null) => {
+  setSelectedDate(date);
+}, []);
+
+// ✅ Memoize the component when props don't change frequently
+const MemoizedDatePicker = memo(DatePicker);
+```
+
 ## ✅ Installation Verification
 
 To verify that the package is working correctly, create a simple test component:
