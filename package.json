@@ -39,7 +39,11 @@
     "size:analyze": "vite-bundle-analyzer dist/stats.json",
     "prepare": "husky install",
     "prepublishOnly": "npm run build && npm run test:run",
-    "release": "semantic-release"
+    "release": "semantic-release",
+    "release:manual": "node scripts/manual-release.js",
+    "release:manual:patch": "node scripts/manual-release.js patch",
+    "release:manual:minor": "node scripts/manual-release.js minor",
+    "release:manual:major": "node scripts/manual-release.js major"
   },
   "keywords": [
     "react",

@@ -21,7 +21,7 @@
 
 ## Related Issues
 
-<!-- Link to related issues using keywords like "Fixes #123" or "Closes #456" -->
+<!-- Link to related issues using keywords like "Fixes #<issue_number>" or "Closes #<issue_number>" -->
 
 - Fixes #
 - Related to #
