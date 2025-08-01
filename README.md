@@ -36,6 +36,18 @@ yarn add react-datepicker-lite
 pnpm add react-datepicker-lite
 ```
 
+### Module Compatibility
+
+React DatePicker Lite supports both **ES Modules (ESM)** and **CommonJS** environments:
+
+- ✅ **Modern bundlers** (Vite, Webpack 5, Rollup) - Uses ESM version automatically
+- ✅ **Node.js CommonJS** - Uses UMD version automatically  
+- ✅ **Legacy bundlers** - Falls back to UMD version
+- ✅ **TypeScript projects** - Full type definitions included
+- ✅ **Browser environments** - Works with both module types
+
+The package automatically selects the appropriate format based on your environment thanks to the `exports` field in package.json.
+
 ### Basic Usage
 
 ```tsx
